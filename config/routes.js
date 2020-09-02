@@ -18,6 +18,9 @@ router.post(
 	// ],
 	profilesController.create
 )
+router.get('/api/profile', profilesController.show)
+router.get('/api/profile/user/:user_id', profilesController.profile)
+router.delete('/api/profile', authenticateUser, profilesController.destroy)
 router.get('/api/auth')
 
 router.get('/api/posts')

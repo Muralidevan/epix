@@ -5,15 +5,15 @@ const { validationResult } = require('express-validator')
 
 // Load Profile Model
 const Profile = require('../models/Profile')
-// // Load User Model
-// const User = require('../models/User')
+// Load User Model
+const User = require('../models/User')
 
 const profilesController = {}
 
 profilesController.user = (req, res) => {
 	console.log('hello')
 	Profile.findOne({ user: req.user.id })
-		.populate('user', ['name'])
+		.populate('user', ['username'])
 		.then((profile) => {
 			if (!profile) {
 				return res
@@ -73,7 +73,7 @@ profilesController.create = (req, res) => {
 					// Update
 					Profile.findOneAndUpdate(
 						{ user: req.user.id },
-						{ $set: profileFields },
+						{ $set: profileFields }, //{...profileFields}
 						{ new: true }
 					)
 						.then((profile) => res.json(profile))
@@ -88,6 +88,56 @@ profilesController.create = (req, res) => {
 					.catch((err) => res.json(err.message))
 
 				//res.send('hello')
+			})
+			.catch((err) => res.json(err.message))
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server error')
+	}
+}
+
+profilesController.show = (req, res) => {
+	try {
+		Profile.find()
+			.populate('user', ['username'])
+			.then((profiles) => {
+				res.json(profiles)
+			})
+			.catch((err) => res.json(err.message))
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server error')
+	}
+}
+
+profilesController.profile = (req, res) => {
+	try {
+		Profile.findOne({ user: req.params.user_id })
+			.populate('user', ['username'])
+			.then((profile) => {
+				if (!profile) {
+					res.status(400).json({ msg: 'Profile Not Found' })
+				}
+				res.json(profile)
+			})
+			.catch((err) => res.json(err.message))
+	} catch (err) {
+		console.error(err.message)
+		if (err.kind == 'ObjectId') {
+			res.status(400).json({ msg: 'Profile Not Found' })
+		}
+		res.status(500).send('Server error')
+	}
+}
+profilesController.destroy = (req, res) => {
+	try {
+		//Remove Profile
+		Profile.findOneAndRemove({ user: req.user.id })
+			.then(() => {
+				//Remove User
+				User.findOneAndRemove({ _id: req.user.id })
+					.then(() => res.json({ msg: 'User Deleted' }))
+					.catch((err) => res.json(err.message))
 			})
 			.catch((err) => res.json(err.message))
 	} catch (err) {
