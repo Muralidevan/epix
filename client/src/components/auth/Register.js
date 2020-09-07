@@ -43,8 +43,11 @@ const Register = (props, isAuthenticated) => {
 				email,
 				password,
 			}
+			// const redirect = () => {
+			// 	return <Redirect to='/login' />
+			// }
 			const redirect = () => {
-				return <Redirect to='/login' />
+				return props.history.push('/login')
 			}
 
 			props.startRegisterUser(newUser, redirect)
@@ -67,7 +70,8 @@ const Register = (props, isAuthenticated) => {
 						onChange={(e) => {
 							handleChange(e)
 						}}
-						//required
+						required
+						minLength='5'
 					/>
 				</div>
 				<div className='form-group'>
@@ -79,7 +83,7 @@ const Register = (props, isAuthenticated) => {
 						onChange={(e) => {
 							handleChange(e)
 						}}
-						//required
+						required
 					/>
 					<small className='form-text'>
 						{/* This site uses Gravatar so if you want a profile image, use a
@@ -95,8 +99,8 @@ const Register = (props, isAuthenticated) => {
 						onChange={(e) => {
 							handleChange(e)
 						}}
-						// required
-						// minLength='6'
+						required
+						minLength='6'
 					/>
 				</div>
 				<div className='form-group'>
@@ -108,8 +112,8 @@ const Register = (props, isAuthenticated) => {
 						onChange={(e) => {
 							handleChange(e)
 						}}
-						// required
-						// minLength='6'
+						required
+						minLength='6'
 					/>
 				</div>
 				<input type='submit' className='btn btn-primary' value='Register' />

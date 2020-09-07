@@ -7,7 +7,7 @@ export const setAlert = (msg, alertType) => {
 		const id = uuidv4()
 		dispatch({
 			type: SET_ALERT,
-			payload: [msg, alertType, id],
+			payload: { msg, alertType, id },
 		})
 		//to dispatch remove alert array after 5secs
 		setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), 3000)

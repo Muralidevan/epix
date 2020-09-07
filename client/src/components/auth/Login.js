@@ -35,11 +35,10 @@ const Login = (props, isAuthenticated) => {
 			password,
 		}
 		props.startLoginUser(newUser)
-		if (isAuthenticated) {
-			return <Redirect to='/login' />
-		}
 	}
-
+	// if (isAuthenticated) {
+	// 	return <Redirect to='/dashboard' />
+	// }
 	return (
 		<Fragment>
 			<h1 className='large text-primary'>Sign In</h1>

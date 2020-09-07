@@ -69,7 +69,7 @@ export const startRegisterUser = (formData, redirect) => {
 				.then((response) => {
 					if (response.data.hasOwnProperty('errors')) {
 						const errors = response.data.errors
-
+						console.log(errors)
 						if (errors) {
 							dispatch(setAlert(errors, 'danger'))
 						}
