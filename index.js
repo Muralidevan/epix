@@ -6,8 +6,10 @@ const router = require('./config/routes')
 
 const app = express()
 
-//connect Database
+var cors = require('cors')
 
+//connect Database
+app.use(cors())
 connectDB()
 
 app.use(express.json())

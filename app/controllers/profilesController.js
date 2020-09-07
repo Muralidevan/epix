@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator')
 
 // Load Profile Model
 const Profile = require('../models/Profile')
-// Load User Model
+//Load User Model
 const User = require('../models/User')
 
 const profilesController = {}
@@ -145,4 +145,101 @@ profilesController.destroy = (req, res) => {
 		res.status(500).send('Server error')
 	}
 }
+profilesController.profileExperience = (req, res) => {
+	const { title, company, location, from, to, current, description } = req.body
+
+	const newExp = { title, company, location, from, to, current, description }
+
+	try {
+		Profile.findOne({ user: req.user.id })
+			.then((profile) => {
+				// Add to exp array newest first(unshift)
+				profile.experience.unshift(newExp)
+
+				profile.save().then((profile) => res.json(profile))
+			})
+			.catch((err) => res.json(err.message))
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server error')
+	}
+}
+profilesController.destroyExperience = (req, res) => {
+	try {
+		Profile.findOne({ user: req.user.id })
+			.then((profile) => {
+				profile.experience = profile.experience.filter(
+					(exp) => exp._id.toString() !== req.params.exp_id
+				)
+				// // Get remove index
+				// const removeIndex = profile.experience
+				// 	.map((item) => item.id)
+				// 	.indexOf(req.params.exp_id)
+
+				// // Splice out of array
+				// profile.experience.splice(removeIndex, 1)
+
+				// Save
+				profile.save().then((profile) => res.json(profile))
+			})
+			.catch((err) => res.status(404).json(err))
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server error')
+	}
+}
+profilesController.profileCertifications = (req, res) => {
+	const {
+		title,
+		organization,
+		location,
+		from,
+		to,
+		current,
+		description,
+	} = req.body
+
+	const newCer = {
+		title,
+		organization,
+		location,
+		from,
+		to,
+		current,
+		description,
+	}
+
+	try {
+		Profile.findOne({ user: req.user.id })
+			.then((profile) => {
+				// Add to Certifications array newest first(unshift)
+				profile.certifications.unshift(newCer)
+
+				profile.save().then((profile) => res.json(profile))
+			})
+			.catch((err) => res.json(err.message))
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server error')
+	}
+}
+profilesController.destroyCertifications = (req, res) => {
+	console.log('hello')
+	try {
+		Profile.findOne({ user: req.user.id })
+			.then((profile) => {
+				profile.certifications = profile.certifications.filter(
+					(cer) => cer._id.toString() !== req.params.cer_id
+				)
+
+				// Save
+				profile.save().then((profile) => res.json(profile))
+			})
+			.catch((err) => res.status(404).json(err))
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server error')
+	}
+}
+
 module.exports = profilesController

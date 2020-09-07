@@ -7,8 +7,9 @@ const connectDB = () => {
 	mongoose
 		.connect('mongodb://localhost:27017/epix', {
 			useNewUrlParser: true,
-			useUnifiedTopology: true,
 			useCreateIndex: true,
+			useFindAndModify: false,
+			useUnifiedTopology: true,
 		})
 		.then(() => {
 			console.log('connected to Db successfully')
