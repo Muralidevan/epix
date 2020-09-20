@@ -6,11 +6,33 @@ const PostSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'user',
 	},
+	profile: {
+		type: Schema.Types.ObjectId,
+		ref: 'profile',
+	},
 	text: {
 		type: String,
 		required: true,
 	},
-	name: {
+	iso: {
+		type: String,
+	},
+	apperture: {
+		type: String,
+	},
+	shutterspeed: {
+		type: String,
+	},
+	imgsrc: {
+		type: String,
+	},
+	// thumbnail: {
+	// 	type: String,
+	// },
+	username: {
+		type: String,
+	},
+	profilePic: {
 		type: String,
 	},
 	likes: [
@@ -23,6 +45,10 @@ const PostSchema = new Schema({
 	],
 	comments: [
 		{
+			profile: {
+				type: Schema.Types.ObjectId,
+				ref: 'profile',
+			},
 			user: {
 				type: Schema.Types.ObjectId,
 				ref: 'user',
@@ -34,6 +60,12 @@ const PostSchema = new Schema({
 			date: {
 				type: Date,
 				default: Date.now,
+			},
+			username: {
+				type: String,
+			},
+			profilePic: {
+				type: String,
 			},
 		},
 	],

@@ -13,7 +13,9 @@ const app = express()
 connectDB()
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(router)
+app.use('/public', express.static('public'))
 
 app.get('/', (req, res) => res.send('API Running'))
 const PORT = process.env.PORT || 3055

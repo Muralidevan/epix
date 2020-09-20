@@ -1,16 +1,21 @@
 const User = require('../models/User')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { validationResult } = require('express-validator')
 const usersController = {}
 
 usersController.register = (req, res) => {
+	const errors = validationResult(req)
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() })
+	}
 	const body = req.body
 
 	try {
 		User.findOne({ email: body.email })
 			.then((user) => {
 				if (user) {
-					return res.status(400).json({ errors: 'User Already Exists' })
+					return res.status(200).json({ errors: 'User Already Exists' })
 				}
 			})
 			.catch((err) => {
@@ -90,7 +95,7 @@ usersController.login = (req, res) => {
 usersController.account = (req, res) => {
 	try {
 		//console.log(req.body)
-		const user = User.findById(req.user.id)
+		User.findById(req.user.id)
 			.select('-password')
 			.then((user) => {
 				res.json(user)

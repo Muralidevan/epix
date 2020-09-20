@@ -1,24 +1,44 @@
 import axios from '../Config/axios'
 import { setAlert } from './alertAction'
+import Swal from 'sweetalert2'
+import { clearProfile } from '../actions/profileAction'
 
 export const setUser = (user) => {
 	return { type: 'SET_USER', payload: user }
 }
 
-export const startLoginUser = (formData) => {
+export const logOut = () => {
+	return { type: 'LOG_OUT' }
+}
+
+export const startLoginUser = (formData, redirect) => {
 	return (dispatch) => {
 		axios
 			.post('/users/login', formData)
 			.then((response) => {
 				if (response.data.hasOwnProperty('errors')) {
 					//alert(response.data.error)
-					dispatch(setAlert('invalid username orpassword', 'danger'))
+					dispatch(setAlert('Invalid Username or Password', 'danger'))
 				} else {
-					dispatch(setAlert('Login Sucessfull', 'success'))
+					const Toast = Swal.mixin({
+						toast: true,
+						position: 'top',
+						showConfirmButton: false,
+						timer: 2000,
+						timerProgressBar: true,
+						onOpen: (toast) => {
+							toast.addEventListener('mouseenter', Swal.stopTimer)
+							toast.addEventListener('mouseleave', Swal.resumeTimer)
+						},
+					})
+
+					Toast.fire({
+						icon: 'success',
+						title: 'Signed In Successfully',
+					})
+					//dispatch(setAlert('Login Sucessfull', 'success'))
 					localStorage.setItem('authToken', response.data.token)
 
-					// Promise.all()
-					//startGetUser()
 					axios
 						.get('/users/account', {
 							headers: {
@@ -29,10 +49,10 @@ export const startLoginUser = (formData) => {
 							const user = response.data
 
 							dispatch(setUser(user))
-							//redirect()
+							redirect()
 						})
 						.catch((err) => {
-							alert(err)
+							console.log(err)
 						})
 				}
 			})
@@ -56,7 +76,10 @@ export const startGetUser = () => {
 				dispatch(setUser(user))
 			})
 			.catch((err) => {
-				alert(err)
+				console.log(err)
+				if (err) {
+					window.location.reload()
+				}
 			})
 	}
 }
@@ -69,14 +92,29 @@ export const startRegisterUser = (formData, redirect) => {
 				.then((response) => {
 					if (response.data.hasOwnProperty('errors')) {
 						const errors = response.data.errors
-						console.log(errors)
+						//console.log(errors)
 						if (errors) {
 							dispatch(setAlert(errors, 'danger'))
 						}
 					} else {
-						// alert('you have registered successfully')
-						const success = 'you have registered successfully'
-						dispatch(setAlert(success, 'success'))
+						const Toast = Swal.mixin({
+							toast: true,
+							position: 'top',
+							showConfirmButton: false,
+							timer: 2000,
+							timerProgressBar: true,
+							onOpen: (toast) => {
+								toast.addEventListener('mouseenter', Swal.stopTimer)
+								toast.addEventListener('mouseleave', Swal.resumeTimer)
+							},
+						})
+
+						Toast.fire({
+							icon: 'info',
+							title: 'You Have Registered Successfully',
+						})
+						// const success = 'you have registered successfully'
+						// dispatch(setAlert(success, 'success'))
 						startGetUser()
 						redirect()
 					}
@@ -96,19 +134,28 @@ export const startRegisterUser = (formData, redirect) => {
 
 export const startUserLogout = () => {
 	return (dispatch) => {
-		axios
-			.delete('/users/logout', {
-				headers: {
-					'x-auth': localStorage.getItem('authToken'),
-				},
-			})
-			.then((response) => {
-				if (response.data.notice) {
-					alert(response.data.notice)
-					localStorage.removeItem('authToken')
-					dispatch(setUser({}))
-					window.location.href = '/'
-				}
-			})
+		localStorage.removeItem('authToken')
+		dispatch(clearProfile())
+		dispatch(setUser({}))
+
+		dispatch(logOut())
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top',
+			showConfirmButton: false,
+			timer: 1000,
+
+			onOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			},
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: 'Signed Out Successfully',
+		})
+
+		window.location.href = '/'
 	}
 }

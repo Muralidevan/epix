@@ -29,6 +29,9 @@ const ProfileSchema = new Schema({
 	bio: {
 		type: String,
 	},
+	profilePic: {
+		type: String,
+	},
 
 	experience: [
 		{

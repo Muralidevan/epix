@@ -1,7 +1,4 @@
 const express = require('express')
-const router = express.Router()
-const mongoose = require('mongoose')
-const { validationResult } = require('express-validator')
 
 const Profile = require('../models/Profile')
 
@@ -12,21 +9,51 @@ const Post = require('../models/Post')
 const postsController = {}
 
 postsController.create = (req, res) => {
+	let imagePath
+	// let imgsrc = req.body
+	// thumbnail = req.body
+	const body = req.body
+	if (req.file) {
+		// dest = req.file.destination
+		imagePath =
+			req.protocol +
+			'://' +
+			req.get('host') +
+			'/public/uploads/' +
+			req.file.filename
+	}
+	//console.log(imagePath)
+	//Build profile object
+
+	body.imgsrc = imagePath
+	body.thumbnail = imagePath
 	try {
 		//since we are logged token stores info in req.user.id and remove password
 		User.findById(req.user.id)
 			.select('-password')
 			.then((user) => {
-				const newPost = new Post({
-					text: req.body.text,
-					//name coming from the user
-					name: user.username,
-					user: req.user.id,
+				Profile.findOne({ user: req.user.id }).then((profile) => {
+					//	console.log(profile.profilePic)
+					const newPost = new Post({
+						text: body.text,
+						iso: body.iso,
+						apperture: body.apperture,
+						shutterspeed: body.shutterspeed,
+						imgsrc: body.imgsrc,
+						thumbnail: body.thumbnail,
+						//name coming from the user
+						username: user.username,
+						//pic from porfile
+						profilePic: profile.profilePic,
+						//img
+
+						user: req.user.id,
+					})
+					newPost
+						.save()
+						.then((post) => res.json(post))
+						.catch((err) => res.status(400).json(err))
 				})
-				newPost
-					.save()
-					.then((post) => res.json(post))
-					.catch((err) => res.json(err.message))
 			})
 			.catch((err) => res.status(404).json(err))
 	} catch (err) {
@@ -54,7 +81,7 @@ postsController.show = (req, res) => {
 
 			.then((post) => {
 				if (!post) {
-					return res.status(404).json({ msg: 'Post Not found' })
+					return res.status(200).json({ msg: 'Post Not found' })
 				}
 				res.json(post)
 			})
@@ -62,7 +89,7 @@ postsController.show = (req, res) => {
 	} catch (err) {
 		console.error(err.message)
 		if (err.kind === 'ObjectId') {
-			return res.status(404).json({ msg: 'Post Not found' })
+			return res.status(200).json({ msg: 'Post Not found' })
 		}
 		res.status(500).send('Server error')
 	}
@@ -72,7 +99,7 @@ postsController.destroy = (req, res) => {
 		Post.findById(req.params.id)
 			.then((post) => {
 				if (!post) {
-					return res.status(404).json({ msg: 'Post Not found' })
+					return res.status(200).json({ msg: 'Post Not found' })
 				}
 				//check user to delete only his post
 				if (post.user.toString() !== req.user.id) {
@@ -154,16 +181,19 @@ postsController.createComment = (req, res) => {
 			.select('-password')
 			.then((user) => {
 				Post.findById(req.params.id).then((post) => {
-					const newComment = {
-						text: req.body.text,
-						//name coming from the user
-						name: user.username,
-						user: req.user.id,
-					}
+					Profile.findOne({ user: req.user.id }).then((profile) => {
+						const newComment = {
+							text: req.body.text,
+							//name coming from the user
+							username: user.username,
+							user: req.user.id,
+							profilePic: profile.profilePic,
+						}
 
-					post.comments.unshift(newComment)
-					post.save()
-					res.json(post.comments)
+						post.comments.unshift(newComment)
+						post.save()
+						res.json(post.comments)
+					})
 				})
 			})
 			.catch((err) => res.status(404).json(err))
@@ -181,11 +211,11 @@ postsController.deleteComment = (req, res) => {
 			)
 			// To Check if comment exists or not
 			if (!comment) {
-				return res.status(404).json({ msg: 'Comment does not exist' })
+				return res.status(200).json({ msg: 'Comment does not exist' })
 			}
 			// Check user and because comment.user gives ObjectId -use toString()
 			if (comment.user.toString() !== req.user.id) {
-				return res.status(401).json({ msg: 'User not authorized' })
+				return res.status(200).json({ msg: 'User not authorized' })
 			}
 
 			post.comments = post.comments.filter(

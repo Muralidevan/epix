@@ -1,10 +1,10 @@
 /* Global Styles */
 :root {
-	--primary-color: #17a2b8;
-	--dark-color: #343a40;
+	--primary-color: rgb(233, 165, 20);
+	--dark-color: #24252a;
 	--light-color: #f4f4f4;
 	--danger-color: #dc3545;
-	--success-color: #28a745;
+	--success-color: #0aee0a;
 }
 
 * {
@@ -12,13 +12,15 @@
 	margin: 0;
 	padding: 0;
 }
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap"');
 body {
-	font-family: 'Raleway', sans-serif;
-	font-size: 1rem;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	color: #edf0f1;
 	line-height: 1.6;
-	background-color: #fff;
-	color: #333;
+	background-color: #edf0f1;
+	color: #24252a;
+	text-decoration: none;
 }
 
 a {
@@ -28,6 +30,7 @@ a {
 
 ul {
 	list-style: none;
+	font-size: 500;
 }
 
 img {
@@ -46,9 +49,13 @@ img {
 
 /* Text Styles*/
 .x-large {
+	text-align-last: 'left';
 	font-size: 4rem;
 	line-height: 1.2;
 	margin-bottom: 1rem;
+}
+.x-large:hover {
+	color: rgb(233, 165, 20);
 }
 
 .large {
@@ -58,7 +65,8 @@ img {
 }
 
 .lead {
-	font-size: 1.5rem;
+	text-align-last: 'left';
+	font-size: 2rem;
 	margin-bottom: 1rem;
 }
 
@@ -67,6 +75,7 @@ img {
 }
 
 .text-primary {
+	text-align-last: 'left';
 	color: var(--primary-color);
 }
 
@@ -76,6 +85,7 @@ img {
 
 /* Padding */
 .p {
+	width: 61%;
 	padding: 0.5rem;
 }
 .p-1 {
@@ -117,6 +127,8 @@ img {
 	margin: 0.5rem 0;
 }
 .my-1 {
+	font-size: 1.5rem;
+	text-align: center;
 	margin: 1rem 0;
 }
 .my-2 {
@@ -149,6 +161,7 @@ img {
 }
 
 .alert {
+	width: 30%;
 	padding: 0.8rem;
 	margin: 1rem 0;
 	opacity: 0.9;
@@ -160,6 +173,20 @@ img {
 .bg-primary,
 .badge-primary,
 .alert-primary {
+	/* margin: 0 auto;
+	display: block; */
+	background: var(--primary-color);
+	color: #fff;
+}
+.btn-register {
+	margin: 0 auto;
+	display: block;
+	background: var(--primary-color);
+	color: #fff;
+}
+.btn-login {
+	margin: 0 auto;
+	display: block;
 	background: var(--primary-color);
 	color: #fff;
 }
@@ -168,7 +195,7 @@ img {
 .bg-light,
 .badge-light,
 .alert-light {
-	background: var(--light-color);
+	background: #c0c0c0;
 	color: #333;
 }
 
@@ -184,6 +211,8 @@ img {
 .bg-danger,
 .badge-danger,
 .alert-danger {
+	margin: 0 auto;
+	display: block;
 	background: var(--danger-color);
 	color: #fff;
 }
@@ -200,7 +229,6 @@ img {
 .bg-white,
 .badge-white,
 .alert-white {
-	background: #fff;
 	color: #333;
 	border: #ccc solid 1px;
 }
@@ -215,6 +243,7 @@ img {
 }
 
 .round-img {
+	margin-top: 10%;
 	border-radius: 50%;
 }
 
@@ -235,8 +264,30 @@ img {
 }
 
 /* Forms */
+
 .form .form-group {
+	text-align-last: left;
+	border: none;
 	margin: 1.2rem 0;
+	background-color: #edf0f1;
+}
+.form .form-group-register {
+	text-align-last: center;
+	border: none;
+	margin: 1.2rem 0;
+	background-color: #edf0f1;
+}
+.form .form-group-login {
+	text-align-last: center;
+	border: none;
+	margin: 1.2rem 0;
+	background-color: #edf0f1;
+}
+.form .form-group-profile {
+	display: flex;
+	background-color: #edf0f1;
+	width: 60%;
+	justify-content: space-between;
 }
 
 .form .form-text {
@@ -244,23 +295,188 @@ img {
 	margin-top: 0.3rem;
 	color: #888;
 }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&family=Poppins:wght@400&display=swap');
 
-.form input[type='text'],
-.form input[type='email'],
-.form input[type='password'],
+.form input[type='text'] {
+	text-align-last: left;
+	font-family: 'Poppins', sans-serif;
+	background-color: #edf0f1;
+	width: 30%;
+	-webkit-transition: width 0.5s ease-in-out;
+	transition: width 0.5s ease-in-out;
+	padding: 0.4rem;
+	font-size: 1.2rem;
+
+	border-top: 1px solid #a9a9a9;
+	border-left: 1px solid #a9a9a9;
+	border-right: 1px solid #a9a9a9;
+	border-bottom: 1px solid #a9a9a9;
+}
+.form input[type='text']:focus {
+	outline: none;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+
+	font-size: 1.2rem;
+}
+.form .form-group-profile input[type='text'] {
+	text-align-last: left;
+	font-family: 'Poppins', sans-serif;
+	background-color: #edf0f1;
+	width: 58%;
+	-webkit-transition: width 0.5s ease-in-out;
+	transition: width 0.5s ease-in-out;
+	padding: 0.4rem;
+	font-size: 1.2rem;
+
+	border-top: 1px solid #a9a9a9;
+	border-left: 1px solid #a9a9a9;
+	border-right: 1px solid #a9a9a9;
+	border-bottom: 1px solid #a9a9a9;
+}
+.form .form-group-profile input[type='text']:focus {
+	outline: none;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+
+	font-size: 1.2rem;
+}
+.form .form-group-profile select {
+	background: #edf0f1;
+	font-family: 'Poppins', sans-serif;
+	/* padding: 0.2rem;
+	margin: 0.25rem;
+	align-items: center;
+	padding: 0.7rem 2rem; */
+
+	/* background-color: #edf0f1; */
+	display: flex;
+	justify-content: space-between;
+	width: 30%;
+	height: 100%;
+	/* padding: 0.4rem; */
+	font-size: 1.2rem;
+	border-top: 1px solid #a9a9a9;
+	border-left: 1px solid #a9a9a9;
+	border-right: 1px solid #a9a9a9;
+	border-bottom: 1px solid #a9a9a9;
+}
+
+.form input[type='email'] {
+	font-family: 'Poppins', sans-serif;
+	text-align-last: left;
+	background-color: #edf0f1;
+	width: 30%;
+	-webkit-transition: width 0.5s ease-in-out;
+	transition: width 0.5s ease-in-out;
+	padding: 0.4rem;
+	font-size: 1.2rem;
+	border-top: 1px solid #a9a9a9;
+	border-left: 1px solid #a9a9a9;
+	border-right: 1px solid #a9a9a9;
+	border-bottom: 1px solid #a9a9a9;
+}
+
+.form input[type='email']:focus {
+	outline: none;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+	font-size: 1.2rem;
+}
+
+.form input[type='password'] {
+	text-align-last: left;
+	font-family: 'Poppins', sans-serif;
+	background-color: #edf0f1;
+	width: 30%;
+	-webkit-transition: width 0.5s ease-in-out;
+	transition: width 0.5s ease-in-out;
+	padding: 0.4rem;
+	font-size: 1.2rem;
+	border-top: 1px solid #a9a9a9;
+	border-left: 1px solid #a9a9a9;
+	border-right: 1px solid #a9a9a9;
+	border-bottom: 1px solid #a9a9a9;
+}
+.form input[type='password']:focus {
+	outline: none;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+	font-size: 1.2rem;
+}
 .form input[type='date'],
 .form select,
 .form textarea {
+	background: #edf0f1;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+	font-family: 'Poppins', sans-serif;
+
+	/* background-color: #edf0f1; */
 	display: block;
-	width: 100%;
+	width: 58%;
+	height: 100%;
 	padding: 0.4rem;
 	font-size: 1.2rem;
-	border: 1px solid #ccc;
+	border-top: 1px solid #a9a9a9;
+	border-left: 1px solid #a9a9a9;
+	border-right: 1px solid #a9a9a9;
+	border-bottom: 1px solid #a9a9a9;
+}
+.form select,
+.form textarea :focus {
+	outline: none;
+	/* border-color: #9ecaed; */
+
+	box-shadow: 0 0 10px #9ecaed;
+	font-size: 1.2rem;
 }
 
 .form input[type='submit'],
 button {
 	font: inherit;
+}
+.form input[type='file'],
+button {
+	font: inherit;
+	color: var(--primary-color);
+}
+
+.pro-pic {
+	color: black;
+	margin: 1rem 0;
+	border-radius: 50%;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+	width: 250px;
+	height: 200px;
+
+	background-color: #edf0f1;
+	align-items: center;
+}
+.post-pic {
+	color: black;
+	margin: 1rem 0;
+
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+	width: 250px;
+	height: 200px;
+
+	background-color: #edf0f1;
+	align-items: center;
+}
+.post-image {
+	color: black;
+	margin: 1rem 0;
+
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+	width: 800px;
+	height: 200px;
+
+	background-color: #edf0f1;
+	align-items: center;
 }
 
 .form .social-input {
@@ -299,6 +515,7 @@ button {
 }
 
 /* Navbar */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300&display=swap"');
 .navbar {
 	display: flex;
 	justify-content: space-between;
@@ -308,7 +525,8 @@ button {
 	z-index: 1;
 	width: 100%;
 	top: 0;
-	border-bottom: solid 1px var(--primary-color);
+	background-color: #24252a;
+	/* border-bottom: solid 1px var(--primary-color); */
 	opacity: 0.9;
 }
 
@@ -317,13 +535,15 @@ button {
 }
 
 .navbar a {
-	color: #fff;
-	padding: 0.45rem;
-	margin: 0 0.25rem;
+	font-size: 16px;
+	font-family: 'Montserrat', sans-serif;
+	color: #edf0f1;
+	padding: 0.2rem;
+	margin: 0.25rem;
 }
 
 .navbar a:hover {
-	color: var(--primary-color);
+	color: rgb(233, 165, 20);
 }
 
 .navbar .welcome span {
@@ -333,7 +553,8 @@ button {
 /* Landing Page */
 .landing {
 	position: relative;
-	background: url('./img/showcase.jpg') no-repeat center center/cover;
+	background: url('./img/taneli-lahtinen-ycmLVgeIUPE-unsplash.jpg') no-repeat
+		center center/cover;
 	height: 100vh;
 }
 
@@ -366,8 +587,7 @@ button {
 	grid-template-areas:
 		'top top'
 		'about about'
-		'exp edu'
-		'github github';
+		'exp edu';
 	grid-gap: 1rem;
 }
 
@@ -435,24 +655,6 @@ button {
 	margin: 0.5rem 0;
 }
 
-.profile-github {
-	grid-area: github;
-}
-
-.profile-github .repo {
-	display: flex;
-}
-
-.profile-github .repo > div:first-child {
-	flex: 7;
-	flex-basis: 70%;
-}
-
-.profile-github > div:last-child {
-	flex: 3;
-	flex-basis: 20%;
-}
-
 /* Posts Page */
 .post-form .post-form-header {
 	background: var(--primary-color);
@@ -460,14 +662,39 @@ button {
 }
 
 .post {
+	/* border: none; */
+	/* position: relative; */
 	display: grid;
-	grid-template-columns: 1fr 4fr;
-	grid-gap: 2rem;
-	align-items: center;
+	grid-template-columns: 1fr;
+	text-align-last: left;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+	/* grid-gap: 0.2rem; */
+}
+.post .post-group {
+	display: flex;
+	background-color: #edf0f1;
+	width: auto;
+
+	/* justify-content: space-between; */
+	/* grid-gap: 1rem;
+	grid-template-columns: 1fr 2fr;
+	display: grid; */
+	text-align-last: left;
+}
+.post div:last-child {
+	text-align-last: left;
+}
+.post .post-group-2 {
+	/* flex: 100%; */
+	width: 100%;
+	text-align: left;
+	background-color: #edf0f1;
+	padding: 10px;
 }
 
 .post > div:first-child {
-	text-align: center;
+	text-align-last: left;
 }
 
 .post img {
@@ -483,8 +710,9 @@ button {
 }
 
 .post .post-date {
+	text-align-last: left;
 	color: #aaa;
-	font-size: 0.8rem;
+	font-size: 1rem;
 	margin-bottom: 0.5rem;
 }
 

@@ -14,22 +14,20 @@ const UserSchema = new Schema({
 		type: String,
 		required: true,
 		unique: true,
-		validate: {
-			validator: function (value) {
-				return isEmail(value)
-			},
-			message: function () {
-				return 'invalid email format'
-			},
-		},
+		// validate: {
+		// 	validator: function (value) {
+		// 		return isEmail(value)
+		// 	},
+		// 	message: function () {
+		// 		return 'invalid email format'
+		// 	},
+		// },
 	},
 	password: {
 		type: String,
 		required: true,
-		minlength: 8,
-		maxlength: 128,
 	},
-	avatar: {
+	profilePic: {
 		type: String,
 	},
 	date: {

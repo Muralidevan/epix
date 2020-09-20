@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { startRegisterUser } from '../../actions/userAction'
 //for connecting component to the store
@@ -8,7 +8,7 @@ import { setAlert } from '../../actions/alertAction'
 
 import PropTypes from 'prop-types' //impt
 
-const Register = (props, isAuthenticated) => {
+const Register = (props) => {
 	const [formData, setFormData] = useState({
 		username: '',
 		email: '',
@@ -28,6 +28,8 @@ const Register = (props, isAuthenticated) => {
 	//object destructuring
 	const { username, email, password, password2 } = formData
 
+	let history = useHistory()
+
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value })
 	}
@@ -43,11 +45,9 @@ const Register = (props, isAuthenticated) => {
 				email,
 				password,
 			}
-			// const redirect = () => {
-			// 	return <Redirect to='/login' />
-			// }
+
 			const redirect = () => {
-				return props.history.push('/login')
+				return history.push('/login')
 			}
 
 			props.startRegisterUser(newUser, redirect)
@@ -56,12 +56,15 @@ const Register = (props, isAuthenticated) => {
 
 	return (
 		<Fragment>
-			<h1 className='large text-primary'>Sign Up</h1>
-			<p className='lead'>
-				<i className='fas fa-user'></i> Create Your Account
-			</p>
 			<form className='form' onSubmit={(e) => onSubmit(e)}>
-				<div className='form-group'>
+				<h1 className='large text-primary' style={{ textAlignLast: 'center' }}>
+					Sign Up
+				</h1>
+				<p className='lead' style={{ textAlignLast: 'center' }}>
+					<i className='fas fa-user'></i> Create Your Account
+				</p>
+
+				<div className='form-group-register'>
 					<input
 						type='text'
 						placeholder='Name'
@@ -71,10 +74,11 @@ const Register = (props, isAuthenticated) => {
 							handleChange(e)
 						}}
 						required
-						minLength='5'
+						minLength='4'
+						maxLength='16'
 					/>
 				</div>
-				<div className='form-group'>
+				<div className='form-group-register'>
 					<input
 						type='email'
 						placeholder='Email Address'
@@ -90,10 +94,10 @@ const Register = (props, isAuthenticated) => {
 						Gravatar email */}
 					</small>
 				</div>
-				<div className='form-group'>
+				<div className='form-group-register'>
 					<input
 						type='password'
-						placeholder='Password'
+						placeholder='New Password'
 						name='password'
 						value={password}
 						onChange={(e) => {
@@ -101,9 +105,10 @@ const Register = (props, isAuthenticated) => {
 						}}
 						required
 						minLength='6'
+						maxLength='16'
 					/>
 				</div>
-				<div className='form-group'>
+				<div className='form-group-register'>
 					<input
 						type='password'
 						placeholder='Confirm Password'
@@ -114,9 +119,10 @@ const Register = (props, isAuthenticated) => {
 						}}
 						required
 						minLength='6'
+						maxLength='16'
 					/>
 				</div>
-				<input type='submit' className='btn btn-primary' value='Register' />
+				<input type='submit' className='btn btn-register' value='Register' />
 			</form>
 			<p className='my-1'>
 				Already have an account? <Link to='/login'>Sign In</Link>
@@ -128,15 +134,11 @@ const Register = (props, isAuthenticated) => {
 Register.propTypes = {
 	setAlert: PropTypes.func.isRequired, //ptfr-es7 snippet
 	startRegisterUser: PropTypes.func.isRequired,
-	isAuthenticated: PropTypes.bool, //ptb
+	// isAuthenticated: PropTypes.bool, //ptb
 }
 
-const mapStateToProps = (state) => ({
-	isAuthenticated: state.user.isAuthenticated,
-})
-
 //get state from alert -first parameter,second object with action
-export default connect(mapStateToProps, {
+export default connect(null, {
 	setAlert,
 	startRegisterUser,
 })(Register)

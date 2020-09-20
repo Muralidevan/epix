@@ -3,6 +3,8 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import userReducer from '../reducers/userReducer'
 import alertReducer from '../reducers/alertReducer'
+import profileReducer from '../reducers/profileReducer'
+import postReducer from '../reducers/postReducer'
 
 const middleware = [thunk]
 
@@ -11,6 +13,8 @@ const configureStore = () => {
 		combineReducers({
 			user: userReducer,
 			alert: alertReducer,
+			profile: profileReducer,
+			post: postReducer,
 		}),
 		composeWithDevTools(applyMiddleware(...middleware))
 	)

@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { startLoginUser } from '../../actions/userAction'
 //for connecting component to the store
 import { connect } from 'react-redux'
 
-const Login = (props, isAuthenticated) => {
+const Login = (props, { user }) => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -23,6 +23,7 @@ const Login = (props, isAuthenticated) => {
 
 	//object destructuring
 	const { email, password } = formData
+	let history = useHistory()
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -34,19 +35,22 @@ const Login = (props, isAuthenticated) => {
 			email,
 			password,
 		}
-		props.startLoginUser(newUser)
+		const redirect = () => {
+			return history.push('/dashboard')
+		}
+		props.startLoginUser(newUser, redirect)
 	}
-	// if (isAuthenticated) {
-	// 	return <Redirect to='/dashboard' />
-	// }
+
 	return (
 		<Fragment>
-			<h1 className='large text-primary'>Sign In</h1>
-			<p className='lead'>
+			<h1 className='large text-primary' style={{ textAlignLast: 'center' }}>
+				Sign In
+			</h1>
+			<p className='lead' style={{ textAlignLast: 'center' }}>
 				<i className='fas fa-user'></i> Sign Into Your Account
 			</p>
 			<form className='form' onSubmit={(e) => onSubmit(e)}>
-				<div className='form-group'>
+				<div className='form-group-login'>
 					<input
 						type='email'
 						placeholder='Email Address'
@@ -58,7 +62,7 @@ const Login = (props, isAuthenticated) => {
 						required
 					/>
 				</div>
-				<div className='form-group'>
+				<div className='form-group-login'>
 					<input
 						type='password'
 						placeholder='Password'
@@ -72,10 +76,10 @@ const Login = (props, isAuthenticated) => {
 					/>
 				</div>
 
-				<input type='submit' className='btn btn-primary' value='Login' />
+				<input type='submit' className='btn btn-login' value='Login' />
 			</form>
 			<p className='my-1'>
-				Dont't have an account? <Link to='/register'>Sign Up</Link>
+				Don't have an account? <Link to='/register'>Sign Up</Link>
 			</p>
 		</Fragment>
 	)
@@ -83,11 +87,10 @@ const Login = (props, isAuthenticated) => {
 
 Login.propTypes = {
 	startLoginUser: PropTypes.func.isRequired,
-	isAuthenticated: PropTypes.bool,
 }
 
 const mapStateToProps = (state) => ({
-	isAuthenticated: state.user.isAuthenticated,
+	user: state.user,
 })
 
 export default connect(mapStateToProps, { startLoginUser })(Login) //startlogin to use as props

@@ -1,19 +1,19 @@
 const express = require('express')
-const router = express.Router()
-const mongoose = require('mongoose')
+
 const { validationResult } = require('express-validator')
 
 // Load Profile Model
 const Profile = require('../models/Profile')
 //Load User Model
 const User = require('../models/User')
+const Post = require('../models/Post')
 
 const profilesController = {}
 
 profilesController.user = (req, res) => {
-	console.log('hello')
+	//console.log('hello')
 	Profile.findOne({ user: req.user.id })
-		.populate('user', ['username'])
+		.populate('user', ['username,profilePic'])
 		.then((profile) => {
 			if (!profile) {
 				return res
@@ -26,15 +26,17 @@ profilesController.user = (req, res) => {
 }
 
 profilesController.create = (req, res) => {
-	// const errors = validationResult(req)
-	// if (!errors.isEmpty()) {
-	// 	return res.status(400).json({ errors: errors.array() })
-	// }
+	// console.log(req.body)
+	const errors = validationResult(req)
+	if (!errors.isEmpty()) {
+		return res.status(404).json({ errors: errors.array() })
+	}
 	const {
 		company,
 		location,
 		website,
 		bio,
+
 		skills,
 		status,
 		youtube,
@@ -44,33 +46,33 @@ profilesController.create = (req, res) => {
 		facebook,
 	} = req.body
 
-	//Build profile object
+	//build profile object
 	const profileFields = {}
-	profileFields.user = req.user.id
 
+	profileFields.user = req.user.id
 	if (company) profileFields.company = company
 	if (website) profileFields.website = website
 	if (location) profileFields.location = location
 	if (bio) profileFields.bio = bio
 	if (status) profileFields.status = status
 	if (skills) {
-		//converting skills string to array and trimming the space
 		profileFields.skills = skills.split(',').map((skill) => skill.trim())
 	}
 
-	//Build social object
+	// Build social object and add to profileFields
 	profileFields.social = {}
 	if (youtube) profileFields.social.youtube = youtube
 	if (twitter) profileFields.social.twitter = twitter
 	if (facebook) profileFields.social.facebook = facebook
-	if (linkedin) profileFields.social.linkedin = linkedin
 	if (instagram) profileFields.social.instagram = instagram
+
+	if (linkedin) profileFields.social.linkedin = linkedin
 
 	try {
 		Profile.findOne({ user: req.user.id })
 			.then((profile) => {
+				// Update
 				if (profile) {
-					// Update
 					Profile.findOneAndUpdate(
 						{ user: req.user.id },
 						{ $set: profileFields }, //{...profileFields}
@@ -99,7 +101,7 @@ profilesController.create = (req, res) => {
 profilesController.show = (req, res) => {
 	try {
 		Profile.find()
-			.populate('user', ['username'])
+			.populate('user', ['username', 'profilePic'])
 			.then((profiles) => {
 				res.json(profiles)
 			})
@@ -113,7 +115,7 @@ profilesController.show = (req, res) => {
 profilesController.profile = (req, res) => {
 	try {
 		Profile.findOne({ user: req.params.user_id })
-			.populate('user', ['username'])
+			.populate('user', ['username', 'profilePic'])
 			.then((profile) => {
 				if (!profile) {
 					res.status(400).json({ msg: 'Profile Not Found' })
@@ -131,6 +133,9 @@ profilesController.profile = (req, res) => {
 }
 profilesController.destroy = (req, res) => {
 	try {
+		//Remove user Posts
+		Post.deleteMany({ user: req.user.id })
+
 		//Remove Profile
 		Profile.findOneAndRemove({ user: req.user.id })
 			.then(() => {
@@ -157,6 +162,51 @@ profilesController.profileExperience = (req, res) => {
 				profile.experience.unshift(newExp)
 
 				profile.save().then((profile) => res.json(profile))
+			})
+			.catch((err) => res.json(err.message))
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server error')
+	}
+}
+profilesController.profilePicture = (req, res) => {
+	//console.log(req.body, req.file)
+	let imagePath
+	let profilePic = req.body
+	if (req.file) {
+		// dest = req.file.destination
+		imagePath =
+			req.protocol +
+			'://' +
+			req.get('host') +
+			'/public/uploads/' +
+			req.file.filename
+	}
+	console.log(imagePath)
+	//Build profile object
+
+	profilePic = imagePath
+
+	try {
+		Profile.findOne({ user: req.user.id })
+			.then((profile) => {
+				if (profile) {
+					// Update
+					Profile.findOneAndUpdate(
+						{ user: req.user.id },
+						{ profilePic }, //{...body}
+						{ new: true }
+					)
+						.then((profile) => res.json(profile))
+						.catch((err) => res.json(err.message))
+				}
+				profile.profilePic = profilePic
+				profile
+					.save()
+					.then((profile) => res.json(profile))
+					.catch((err) => res.json(err.message))
+
+				//res.send('hello')
 			})
 			.catch((err) => res.json(err.message))
 	} catch (err) {
@@ -224,7 +274,7 @@ profilesController.profileCertifications = (req, res) => {
 	}
 }
 profilesController.destroyCertifications = (req, res) => {
-	console.log('hello')
+	//console.log('hello')
 	try {
 		Profile.findOne({ user: req.user.id })
 			.then((profile) => {

@@ -5,11 +5,35 @@ const profilesController = require('../app/controllers/profilesController')
 const postsController = require('../app/controllers/postsController')
 const { authenticateUser } = require('../app/middlewares/authentication')
 const { check } = require('express-validator')
+const checkObjectId = require('../app/middlewares/checkObjectId')
+const multer = require('multer')
+const multerConf = require('../app/middlewares/upload')
 
-router.post('/api/users/register', usersController.register)
-router.post('/api/users/login', usersController.login)
+router.post(
+	'/api/users/register',
+	[
+		check('username', 'Name is required').not().isEmpty(),
+		check('email', 'Please include a valid email').isEmail(),
+		check(
+			'password',
+			'Please enter a password with 6 or more characters'
+		).isLength({ min: 6 }),
+	],
+	usersController.register
+)
+router.post(
+	'/api/users/login',
+	check('email', 'Please include a valid email').isEmail(),
+	check(
+		'password',
+		'Please enter a password with 6 or more characters'
+	).isLength({ min: 6 }),
+	usersController.login
+)
+
 router.get('/api/users/account', authenticateUser, usersController.account)
 router.get('/api/profile/me', authenticateUser, profilesController.user)
+
 router.post(
 	'/api/profile',
 	[
@@ -17,12 +41,24 @@ router.post(
 		[
 			check('status', 'Status is required').not().isEmpty(),
 			check('skills', 'Skills is required').not().isEmpty(),
+			check('website', 'Website is required').not().isEmpty(),
 		],
 	],
+
 	profilesController.create
 )
+router.post(
+	'/api/profilepic',
+	[authenticateUser],
+	multer(multerConf).single('profilePic'),
+	profilesController.profilePicture
+)
 router.get('/api/profile', profilesController.show)
-router.get('/api/profile/user/:user_id', profilesController.profile)
+router.get(
+	'/api/profile/:user_id',
+	checkObjectId('user_id'),
+	profilesController.profile
+)
 router.delete('/api/profile', authenticateUser, profilesController.destroy)
 router.put(
 	'/api/profile/experience',
@@ -62,6 +98,7 @@ router.delete(
 router.post(
 	'/api/posts',
 	[authenticateUser, [check('text', 'Text is required').not().isEmpty()]],
+	multer(multerConf).single('imgsrc'),
 	postsController.create
 )
 
@@ -69,10 +106,25 @@ router.get('/api/posts', authenticateUser, postsController.listall)
 
 router.get('/api/posts/:id', authenticateUser, postsController.show)
 
-router.delete('/api/posts/:id', authenticateUser, postsController.destroy)
+router.delete(
+	'/api/posts/:id',
+	authenticateUser,
+	checkObjectId('id'),
+	postsController.destroy
+)
 
-router.put('/api/posts/likes/:id', authenticateUser, postsController.likes)
-router.put('/api/posts/unlikes/:id', authenticateUser, postsController.unlikes)
+router.put(
+	'/api/posts/likes/:id',
+	authenticateUser,
+	checkObjectId('id'),
+	postsController.likes
+)
+router.put(
+	'/api/posts/unlikes/:id',
+	authenticateUser,
+	checkObjectId('id'),
+	postsController.unlikes
+)
 
 router.post(
 	'/api/posts/comment/:id',
