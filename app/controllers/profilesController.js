@@ -1,19 +1,18 @@
-const express = require('express')
-
 const { validationResult } = require('express-validator')
-
 // Load Profile Model
 const Profile = require('../models/Profile')
 //Load User Model
 const User = require('../models/User')
 const Post = require('../models/Post')
+// bring in normalize to give us a proper url, regardless of what user entered
+const normalize = require('normalize-url')
 
 const profilesController = {}
 
 profilesController.user = (req, res) => {
 	//console.log('hello')
 	Profile.findOne({ user: req.user.id })
-		.populate('user', ['username,profilePic'])
+		.populate('user', ['username'])
 		.then((profile) => {
 			if (!profile) {
 				return res
@@ -60,17 +59,19 @@ profilesController.create = (req, res) => {
 	}
 
 	// Build social object and add to profileFields
-	profileFields.social = {}
-	if (youtube) profileFields.social.youtube = youtube
-	if (twitter) profileFields.social.twitter = twitter
-	if (facebook) profileFields.social.facebook = facebook
-	if (instagram) profileFields.social.instagram = instagram
+	// Build social object and add to profileFields
+	const socialfields = { youtube, twitter, instagram, linkedin, facebook }
 
-	if (linkedin) profileFields.social.linkedin = linkedin
+	for (const [key, value] of Object.entries(socialfields)) {
+		if (value && value.length > 0)
+			socialfields[key] = normalize(value, { forceHttps: true })
+	}
+	profileFields.social = socialfields
 
 	try {
 		Profile.findOne({ user: req.user.id })
 			.then((profile) => {
+				console.log(profile)
 				// Update
 				if (profile) {
 					Profile.findOneAndUpdate(
@@ -81,13 +82,14 @@ profilesController.create = (req, res) => {
 						.then((profile) => res.json(profile))
 						.catch((err) => res.json(err.message))
 				}
-
-				//  Create and Save Profile
-				profile = new Profile(profileFields)
-				profile
-					.save()
-					.then((profile) => res.json(profile))
-					.catch((err) => res.json(err.message))
+				if (!profile) {
+					//  Create and Save Profile
+					profile = new Profile(profileFields)
+					profile
+						.save()
+						.then((profile) => res.json(profile))
+						.catch((err) => res.json(err.message))
+				}
 
 				//res.send('hello')
 			})

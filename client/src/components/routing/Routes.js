@@ -16,6 +16,7 @@ import PrivateRoute from '../routing/PrivateRoute'
 import Profile from '../profile/Profile'
 import Alert from '../layout/Alert'
 import NotFound from '../layout/NotFound'
+import Album from '../Gallery/gallery'
 
 const Routes = () => {
 	return (
@@ -27,6 +28,7 @@ const Routes = () => {
 				<Route exact path='/profiles' component={Profiles} />
 				<Route exact path='/profile/:id' component={Profile} />
 
+				<PrivateRoute exact path='/gallery' component={Album} />
 				<PrivateRoute exact path='/dashboard' component={Dashboard} />
 				<PrivateRoute exact path='/create-profile' component={CreateProfile} />
 				<PrivateRoute exact path='/profile-picture' component={ProfilePic} />

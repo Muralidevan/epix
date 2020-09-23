@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import React, { Fragment, useState } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { createProfile, getCurrentProfile } from '../../actions/profileAction'
+import { createProfile } from '../../actions/profileAction'
 
 const initialState = {
 	company: '',
@@ -11,7 +11,6 @@ const initialState = {
 	status: '',
 	skills: '',
 
-	preview: '',
 	bio: '',
 	twitter: '',
 	facebook: '',
@@ -22,31 +21,12 @@ const initialState = {
 
 const ProfileForm = ({
 	createProfile,
-	profile: { profile, loading },
-	getCurrentProfile,
+
 	history,
 }) => {
 	const [formData, setFormData] = useState(initialState)
 
 	const [displaySocialInputs, toggleSocialInputs] = useState(false)
-
-	useEffect(() => {
-		if (profile) {
-			getCurrentProfile()
-		}
-		if (!loading && profile) {
-			const profileData = { ...initialState }
-			for (const key in profile) {
-				if (key in profileData) profileData[key] = profile[key]
-			}
-			for (const key in profile.social) {
-				if (key in profileData) profileData[key] = profile.social[key]
-			}
-			if (Array.isArray(profileData.skills))
-				profileData.skills = profileData.skills.join(', ')
-			setFormData(profileData)
-		}
-	}, [loading, getCurrentProfile, profile])
 
 	const {
 		company,
@@ -72,7 +52,7 @@ const ProfileForm = ({
 	const onSubmit = (e) => {
 		e.preventDefault()
 
-		createProfile(formData, history, profile ? true : false)
+		createProfile(formData, history)
 	}
 
 	return (
@@ -99,7 +79,7 @@ const ProfileForm = ({
 						Give us an idea of where you are at in your career
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='Company'
@@ -111,7 +91,7 @@ const ProfileForm = ({
 						Could be your own company or one you work for
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='Website'
@@ -123,7 +103,7 @@ const ProfileForm = ({
 						Could be your own or a company website
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='Location'
@@ -135,7 +115,7 @@ const ProfileForm = ({
 						City & State suggested (eg. Bangalore, KA)
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='* Skills'
@@ -148,7 +128,7 @@ const ProfileForm = ({
 						Speeds,Lenses,Shooting Film)
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group'>
 					<textarea
 						placeholder='A short bio of yourself'
 						name='bio'
@@ -236,14 +216,11 @@ const ProfileForm = ({
 }
 
 ProfileForm.propTypes = {
-	getCurrentProfile: PropTypes.func.isRequired,
-	profile: PropTypes.object.isRequired,
+	createProfile: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
 	profile: state.profile,
 })
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-	withRouter(ProfileForm)
-)
+export default connect(mapStateToProps, { createProfile })(ProfileForm)

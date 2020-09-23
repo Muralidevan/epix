@@ -43,7 +43,7 @@ const AddCertification = ({ addCertification, history }) => {
 					addCertification(formData, history)
 				}}
 			>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='* Course Name'
@@ -56,7 +56,7 @@ const AddCertification = ({ addCertification, history }) => {
 						(Fashion Photography,Product Photography)
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='* Academy Name'
@@ -69,19 +69,26 @@ const AddCertification = ({ addCertification, history }) => {
 						(Pixel photography,Prism School Of Photography)
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='Location'
 						name='location'
 						value={location}
 						onChange={onChange}
+						required
 					/>
 					<small className='form-text'>Location of your academy</small>
 				</div>
 				<div className='form-group'>
 					<h4>From Date</h4>
-					<input type='date' name='from' value={from} onChange={onChange} />
+					<input
+						type='date'
+						name='from'
+						value={from}
+						onChange={onChange}
+						required
+					/>
 				</div>
 				<div className='form-group'>
 					<p>
@@ -93,6 +100,7 @@ const AddCertification = ({ addCertification, history }) => {
 							onChange={() => {
 								setFormData({ ...formData, current: !current })
 							}}
+							required
 						/>{' '}
 						Current
 					</p>

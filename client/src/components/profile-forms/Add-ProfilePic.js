@@ -2,6 +2,8 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import Swal from 'sweetalert2'
+
 import {
 	createProfilePic,
 	getCurrentProfile,
@@ -63,6 +65,16 @@ const ProfilePic = ({
 		// console.log(profilePic, 'profilepic')
 		// console.log(updatedProfilePic, file, 'updatedprofilepic')
 	}
+	const handleClick = () => {
+		Swal.fire({
+			text: 'Please Choose a File To Edit ',
+			showConfirmButton: false,
+			icon: 'info',
+			toast: true,
+			timer: 2000,
+			position: 'top',
+		})
+	}
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -83,7 +95,7 @@ const ProfilePic = ({
 			<h1 className='large text-primary'>Edit Your Profile Picture</h1>
 
 			<form className='form' onSubmit={onSubmit} id='form'>
-				<div className='form-group-profile'>
+				<div className='form-group'>
 					{len ? (
 						<Fragment>
 							<img
@@ -134,7 +146,13 @@ const ProfilePic = ({
 						value='Upload Profile Picture'
 					/>
 				) : (
-					''
+					<button
+						onClick={handleClick}
+						type='button'
+						className='btn btn-primary my-1'
+					>
+						Upload Profile Picture
+					</button>
 				)}
 
 				<Link className='btn btn-light my-1' to='/dashboard'>

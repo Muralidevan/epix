@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
 import { connect } from 'react-redux'
 import { addLike, removeLike, startDeletePosts } from '../../actions/postAction'
-import { relative } from 'path'
+import avatar from '../../../src/img/avatar.jpg'
 
 const PostItem = ({
 	addLike,
 	removeLike,
 	startDeletePosts,
 	users,
+
 	post: {
 		_id,
 		text,
@@ -20,7 +21,6 @@ const PostItem = ({
 		comments,
 		date,
 		profilePic,
-
 		iso,
 		apperture,
 		shutterspeed,
@@ -29,6 +29,7 @@ const PostItem = ({
 
 	showActions,
 }) => {
+	//console.log(profilePic)
 	return (
 		<div className='post bg-white p-1 my-1'>
 			<div className='post-group'>
@@ -36,7 +37,7 @@ const PostItem = ({
 					{profilePic ? (
 						<img className='round-img' src={profilePic} alt='' />
 					) : (
-						''
+						<img src={avatar} alt='' className='round-img' />
 					)}
 				</Link>
 
@@ -48,13 +49,65 @@ const PostItem = ({
 				</div>
 			</div>
 			<div className='post-group-2'>
-				<p className='my-1' style={{ textAlign: 'left' }}>
-					{text}
-				</p>
+				{text ? (
+					<p className='my-1' style={{ textAlign: 'left', fontSize: '1.2rem' }}>
+						{text === 'undefined' ? '' : text}
+					</p>
+				) : (
+					''
+				)}
+
 				<img src={imgsrc} alt='' style={{ width: '100%', height: '700px' }} />
 
 				{showActions && (
 					<Fragment>
+						<div className='post-group' style={{ width: 'auto' }}>
+							<div className='post-group-2' style={{ width: '50%' }}>
+								<p
+									className='my-1'
+									style={{
+										textAlign: 'left',
+										fontSize: '1.8rem',
+										color: 'blueviolet',
+										wordSpacing: '1cm',
+									}}
+								>
+									<i className='fa fa-info-circle' aria-hidden='true'>
+										Iso-{iso === 'undefined' ? 'auto' : iso}
+									</i>
+								</p>
+							</div>
+							<div className='post-group-2' style={{ width: '50%' }}>
+								<p
+									className='my-1'
+									style={{
+										textAlignLast: 'left',
+										fontSize: '1.8rem',
+										color: 'blueviolet',
+									}}
+								>
+									<i className='fa fa-info-circle' aria-hidden='true'>
+										Apperture-{apperture === 'undefined' ? 'auto' : apperture}
+									</i>
+								</p>
+							</div>
+							<div className='post-group-2' style={{ width: '50%' }}>
+								<p
+									className='my-1'
+									style={{
+										textAlignLast: 'left',
+										fontSize: '1.8rem',
+										color: 'blueviolet',
+									}}
+								>
+									<i className='fa fa-info-circle' aria-hidden='true'>
+										ShutterSpeed-
+										{shutterspeed === 'undefined' ? 'auto' : shutterspeed}
+									</i>
+								</p>
+							</div>
+						</div>
+
 						<button
 							onClick={() => addLike(_id)}
 							type='button'
@@ -84,8 +137,8 @@ const PostItem = ({
 								className='btn  btn-primary'
 								style={{ background: '#dc3545' }}
 							>
-								<i className='fas fa-times' />
-								Delete Post
+								<i className='fa fa-trash' aria-hidden='true' />
+								Remove Post
 							</button>
 						)}
 					</Fragment>

@@ -26,9 +26,16 @@ const PostSchema = new Schema({
 	imgsrc: {
 		type: String,
 	},
-	// thumbnail: {
-	// 	type: String,
-	// },
+	thumbnail: {
+		type: String,
+	},
+	thumbnailWidth: {
+		type: Number,
+	},
+	thumbnailHeight: {
+		type: Number,
+	},
+
 	username: {
 		type: String,
 	},

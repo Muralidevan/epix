@@ -39,7 +39,7 @@ const Dashboard = ({
 							}}
 							style={{ margin: 0, display: 'block' }}
 						>
-							<i className='fas fa-user-minus' />
+							<i className='fa fa-trash' aria-hidden='true' />
 							Delete My Account
 						</button>
 					</div>

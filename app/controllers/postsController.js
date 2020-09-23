@@ -126,7 +126,7 @@ postsController.likes = (req, res) => {
 				//check if the post has been already liked
 				//if (post.likes.filter((like) => like.user.toString() === req.user.id).length>0)
 				if (post.likes.some((like) => like.user.toString() === req.user.id)) {
-					return res.status(400).json({ msg: 'Post Already Liked' })
+					return res.status(200).json({ msg: 'Post Already Liked' })
 				}
 				//pushing newest likes to likes array
 				post.likes.unshift({ user: req.user.id })
@@ -153,7 +153,7 @@ postsController.unlikes = (req, res) => {
 				//check if the post has not yet been liked
 				//if (post.likes.filter((like) => like.user.toString() === req.user.id).length==0)
 				if (!post.likes.some((like) => like.user.toString() === req.user.id)) {
-					return res.status(400).json({ msg: 'Post Has Not Yet Been  Liked' })
+					return res.status(200).json({ msg: 'Post Has Not Yet Been  Liked' })
 				}
 				//remove the like
 				post.likes = post.likes.filter(

@@ -67,7 +67,7 @@ const EditProfile = ({
 	const onSubmit = (e) => {
 		e.preventDefault()
 
-		createProfile(formData, history, profile ? true : false)
+		createProfile(formData, history, true)
 	}
 
 	return (
@@ -94,7 +94,7 @@ const EditProfile = ({
 						Give us an idea of where you are at in your career
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='Company'
@@ -106,7 +106,7 @@ const EditProfile = ({
 						Could be your own company or one you work for
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='Website'
@@ -118,7 +118,7 @@ const EditProfile = ({
 						Could be your own or a company website
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='Location'
@@ -130,7 +130,7 @@ const EditProfile = ({
 						City & State suggested (eg. Bangalore, KA)
 					</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='* Skills'

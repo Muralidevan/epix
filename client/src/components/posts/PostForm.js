@@ -1,10 +1,10 @@
-import React, { useState, Fragment, useEffect } from 'react'
+import React, { useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { startAddPost } from '../../actions/postAction'
 import Swal from 'sweetalert2'
 
-const PostForm = ({ startAddPost }) => {
+const PostForm = ({ startAddPost, profile: { profilePic } }) => {
 	const initialState = {
 		text: '',
 		iso: 'auto',
@@ -16,11 +16,6 @@ const PostForm = ({ startAddPost }) => {
 		imgsrc: '',
 	}
 	const [formData, setFormData] = useState(initialState)
-	// useEffect(() => {
-	// 	const postData = { ...initialState }
-
-	// 	setFormData(postData)
-	// }, [])
 
 	const {
 		text,
@@ -53,6 +48,7 @@ const PostForm = ({ startAddPost }) => {
 			reader.readAsDataURL(e.target.files[0])
 		}
 	}
+	//console.log(profilePic)
 	const onChange = (e) => {
 		// e.preventDefault()
 
@@ -81,11 +77,10 @@ const PostForm = ({ startAddPost }) => {
 		form.append('shutterspeed', shutterspeed)
 		form.append('text', text)
 
-		for (const [key, value] of form) {
-			console.log('values', key, value)
-		}
+		// for (const [key, value] of form) {
+		// 	console.log('values', key, value)
+		// }
 		startAddPost(form)
-		// setFormData('')
 	}
 
 	return (
@@ -117,7 +112,7 @@ const PostForm = ({ startAddPost }) => {
 						onChange={handleChange}
 						accept='image/*'
 						encType='multipart/form-data'
-					/>
+					/>{' '}
 				</div>
 				<div className='form-group-profile'>
 					<Fragment>
@@ -268,5 +263,8 @@ const PostForm = ({ startAddPost }) => {
 PostForm.propTypes = {
 	startAddPost: PropTypes.func.isRequired,
 }
+const mapStateToProps = (state) => ({
+	profile: state.profile,
+})
 
-export default connect(null, { startAddPost })(PostForm)
+export default connect(mapStateToProps, { startAddPost })(PostForm)

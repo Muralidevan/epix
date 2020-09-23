@@ -113,12 +113,7 @@ router.delete(
 	postsController.destroy
 )
 
-router.put(
-	'/api/posts/likes/:id',
-	authenticateUser,
-	checkObjectId('id'),
-	postsController.likes
-)
+router.put('/api/posts/likes/:id', authenticateUser, postsController.likes)
 router.put(
 	'/api/posts/unlikes/:id',
 	authenticateUser,

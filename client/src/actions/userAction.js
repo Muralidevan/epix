@@ -143,7 +143,7 @@ export const startUserLogout = () => {
 			toast: true,
 			position: 'top',
 			showConfirmButton: false,
-			timer: 1000,
+			timer: 5000,
 
 			onOpen: (toast) => {
 				toast.addEventListener('mouseenter', Swal.stopTimer)

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import avatar from '../../../src/img/avatar.jpg'
 
 const ProfileTop = ({
 	profile: {
@@ -8,12 +9,17 @@ const ProfileTop = ({
 		location,
 		website,
 		social,
-		user: { username, avatar },
+		profilePic,
+		user: { username },
 	},
 }) => {
 	return (
 		<div className='profile-top bg-primary p-2'>
-			<img className='round-img my-1' src={avatar} alt='' />
+			{profilePic ? (
+				<img className='round-img my-1' src={profilePic} alt='' />
+			) : (
+				<img src={avatar} alt='' className='round-img' />
+			)}
 			<h1 className='large'>{username}</h1>
 			<p className='lead'>
 				{/* //company is not required  so check*/}

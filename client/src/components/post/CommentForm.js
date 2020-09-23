@@ -27,6 +27,7 @@ const CommentForm = ({ postId, startAddComment }) => {
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 					required
+					style={{ width: '61%' }}
 				/>
 
 				<input

@@ -24,13 +24,11 @@ const Profile = ({ getProfileById, profile: { profile }, user, match }) => {
 					<Link to='/profiles' className='btn btn-light'>
 						Back To Profiles
 					</Link>
-					{user.isAuthenticated &&
-						user.loading === false &&
-						user.user._id === profile.user._id && (
-							<Link to='/edit-profile' className='btn btn-dark'>
-								Edit Profile
-							</Link>
-						)}
+					{user.isAuthenticated && (
+						<Link to='/edit-profile' className='btn btn-dark'>
+							Edit Profile
+						</Link>
+					)}
 					<div className='profile-grid my-1'>
 						<ProfileTop profile={profile} />
 						<ProfileAbout profile={profile} />

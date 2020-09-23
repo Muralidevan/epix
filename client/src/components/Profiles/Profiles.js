@@ -16,7 +16,9 @@ const Profiles = ({ getAllUserProfile, profile: { profiles, loading } }) => {
 				<Spinner />
 			) : (
 				<Fragment>
-					<h1 className='large text-primary'>Photographers</h1>
+					<h1 className='large text-primary' style={{ color: 'blueviolet' }}>
+						Photographers
+					</h1>
 					<p className='lead'>
 						<i className='fab fa-connectdevelop'></i>
 						Browse and connect with Photographers

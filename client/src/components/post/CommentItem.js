@@ -29,8 +29,8 @@ const CommentItem = ({
 						className='btn btn-primary'
 						style={{ background: '#dc3545' }}
 					>
-						<i className='fas fa-times' />
-						Delete Comment
+						<i className='fa fa-trash' aria-hidden='true' />
+						Remove Comment
 					</button>
 				)}
 			</div>

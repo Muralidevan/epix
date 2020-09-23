@@ -12,11 +12,20 @@ const Navbar = ({ user: { isAuthenticated }, startUserLogout }) => {
 	const authLinks = (
 		<ul>
 			<li>
-				<Link to='/profiles'>PHOTOGRAPHERS</Link>
+				<Link to='/gallery'>
+					<i className='fa fa-picture-o' aria-hidden='true'></i>&nbsp;GALLERY
+				</Link>
+			</li>
+			<li>
+				<Link to='/profiles'>
+					<i className='fa fa-camera' aria-hidden='true'></i>&nbsp;PHOTOGRAPHERS
+				</Link>
 			</li>
 
 			<li>
-				<Link to='/posts'>POSTS</Link>
+				<Link to='/posts'>
+					<i className='fa fa-product-hunt' aria-hidden='true'></i>&nbsp;POSTS
+				</Link>
 			</li>
 			<li>
 				<Link to='/dashboard'>
@@ -24,14 +33,14 @@ const Navbar = ({ user: { isAuthenticated }, startUserLogout }) => {
 						{' '}
 						<span className='hide-sm'></span>
 					</i>
-					PROFILE
+					&nbsp;PROFILE
 				</Link>
 			</li>
 			<li>
-				<Link onClick={handleLogout}>
+				<Link to='/' onClick={handleLogout}>
 					<i className='fas fa-sign-out-alt'></i>
 					{''}
-					<span className='hide-sm'>SIGNOUT</span>
+					<span className='hide-sm'>&nbsp;SIGNOUT</span>
 				</Link>
 			</li>
 		</ul>
@@ -39,13 +48,19 @@ const Navbar = ({ user: { isAuthenticated }, startUserLogout }) => {
 	const guestLinks = (
 		<ul>
 			<li>
-				<Link to='/profiles'>PHOTOGRAPHERS</Link>
+				<Link to='/profiles'>
+					<i className='fa fa-camera' aria-hidden='true'></i>&nbsp;PHOTOGRAPHERS
+				</Link>
 			</li>
 			<li>
-				<Link to='/register'>SIGNUP</Link>
+				<Link to='/register'>
+					<i className='fa fa-handshake-o' aria-hidden='true'></i>&nbsp;SIGNUP
+				</Link>
 			</li>
 			<li>
-				<Link to='/login'>SIGNIN</Link>
+				<Link to='/login'>
+					<i className='fa fa-sign-in' aria-hidden='true'></i>&nbsp;SIGNIN
+				</Link>
 			</li>
 		</ul>
 	)

@@ -1,39 +1,53 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import avatar from '../../../src/img/avatar.jpg'
 
 const ProfileItem = ({
-	profile: {
-		user: { _id, username },
-		status,
-		company,
-		location,
-		skills,
-	},
+	profile: { user, status, company, location, skills, profilePic },
 }) => {
 	return (
 		<div className='profile bg-light'>
-			<img src='{avatar}' alt='' className='round-img' />
+			{profilePic ? (
+				<img src={profilePic} alt='' className='round-img' />
+			) : (
+				<img src={avatar} alt='' className='round-img' />
+			)}
 			<div>
-				<h2>{username}</h2>
+				{user ? <h2>{user.username}</h2> : ''}
+
 				<p>
 					{status}
 					{company && <span> at {company}</span>}
 				</p>
-				<p>
-					<p className='my-1' style={{ textAlignLast: 'left' }}>
-						{location && <span> at {location}</span>}
-					</p>
+
+				<p className='my-1' style={{ textAlignLast: 'left' }}>
+					{location && <span> at {location}</span>}
 				</p>
-				<Link to={`/profile/${_id}`} className='btn btn-primary'>
-					View Profile
-				</Link>
+
+				{user ? (
+					<Link
+						to={`/profile/${user._id}`}
+						className='btn btn-primary'
+						style={{ fontSize: '1.0rem', backgroundColor: 'blueviolet' }}
+					>
+						View Profile
+					</Link>
+				) : (
+					''
+				)}
 			</div>
 			<ul>
 				{skills.slice(0, 4).map((skill, index) => (
-					<li key={index} className='text-primary'>
-						<i className='fas fa-check' /> {skill}
-					</li>
+					<strong>
+						<li
+							key={index}
+							className='text-primary'
+							style={{ fontSize: '1.0rem', color: 'blueviolet' }}
+						>
+							<i className='fas fa-check' /> {skill}
+						</li>
+					</strong>
 				))}
 			</ul>
 		</div>

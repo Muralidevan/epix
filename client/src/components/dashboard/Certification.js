@@ -23,6 +23,7 @@ const Certification = ({ certification, deleteCertification }) => {
 					onClick={() => deleteCertification(cer._id)}
 					className='btn btn-danger'
 				>
+					<i className='fa fa-trash' aria-hidden='true' />
 					Delete
 				</button>
 			</td>
@@ -35,9 +36,27 @@ const Certification = ({ certification, deleteCertification }) => {
 			<table className='table'>
 				<thead>
 					<tr>
-						<th>Academy Name</th>
-						<th className='hide-sm'>Course Name</th>
-						<th className='hide-sm'>Duration</th>
+						<th style={{ background: '#c0c0c0', color: '#333' }}>
+							<i
+								className='fa fa-graduation-cap text-primary'
+								aria-hidden='true'
+							></i>
+							&nbsp;Academy Name
+						</th>
+						<th
+							className='hide-sm'
+							style={{ background: '#c0c0c0', color: '#333' }}
+						>
+							<i className='fa fa-book text-primary' aria-hidden='true'></i>
+							&nbsp;Course Name
+						</th>
+						<th
+							className='hide-sm'
+							style={{ background: '#c0c0c0', color: '#333' }}
+						>
+							<i className='fa fa-clock-o text-primary' aria-hidden='true'></i>
+							&nbsp;Duration
+						</th>
 					</tr>
 				</thead>
 				<tbody>{certifications}</tbody>
@@ -47,7 +66,7 @@ const Certification = ({ certification, deleteCertification }) => {
 }
 
 Certification.propTypes = {
-	Certification: PropTypes.array.isRequired,
+	// Certification: PropTypes.array.isRequired,
 	deleteCertification: PropTypes.func.isRequired,
 }
 

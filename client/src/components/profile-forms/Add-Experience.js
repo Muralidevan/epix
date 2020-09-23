@@ -35,7 +35,7 @@ const AddExperience = ({ addExperience, history }) => {
 					addExperience(formData, history)
 				}}
 			>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='* Job Title'
@@ -46,7 +46,7 @@ const AddExperience = ({ addExperience, history }) => {
 					/>
 					<small className='form-text'>Give us an idea of where you work</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='* Company'
@@ -57,19 +57,26 @@ const AddExperience = ({ addExperience, history }) => {
 					/>
 					<small className='form-text'>Name of your company</small>
 				</div>
-				<div className='form-group-profile'>
+				<div className='form-group-profile-edit'>
 					<input
 						type='text'
 						placeholder='Location'
 						name='location'
 						value={location}
 						onChange={onChange}
+						required
 					/>
 					<small className='form-text'>Location of your company</small>
 				</div>
 				<div className='form-group'>
 					<h4>From Date</h4>
-					<input type='date' name='from' value={from} onChange={onChange} />
+					<input
+						type='date'
+						name='from'
+						value={from}
+						onChange={onChange}
+						required
+					/>
 				</div>
 				<div className='form-group'>
 					<p>
@@ -81,6 +88,7 @@ const AddExperience = ({ addExperience, history }) => {
 							onChange={() => {
 								setFormData({ ...formData, current: !current })
 							}}
+							required
 						/>{' '}
 						Current Job
 					</p>

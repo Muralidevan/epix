@@ -121,7 +121,7 @@ export const createProfile = (form, history, edit = false) => {
 						  })
 
 					if (!edit) {
-						history.push('/dashboard')
+						history.push('/profile-picture')
 					}
 				})
 				.catch((err) => {
@@ -286,14 +286,14 @@ export const deleteExperience = (id) => {
 		try {
 			Swal.fire({
 				title: 'Are Your Sure?',
-				icon: 'question',
-
+				icon: 'warning',
+				text: "You won't be able to revert this!",
 				showDenyButton: true,
 
 				focusConfirm: false,
-				confirmButtonText: '<i class="fa fa-thumbs-up"></i> Yes',
+				confirmButtonText: '<i class="fa fa-thumbs-up"></i> Yes, delete it!',
 				confirmButtonAriaLabel: 'Thumbs up, great!',
-				denyButtonText: '<i class="fa fa-thumbs-down">No</i>',
+				denyButtonText: '<i class="fa fa-thumbs-down"> Cancel</i>',
 				denyButtonAriaLabel: 'Thumbs down',
 			}).then((result) => {
 				if (result.isConfirmed) {
@@ -342,14 +342,14 @@ export const deleteCertification = (id) => {
 		try {
 			Swal.fire({
 				title: 'Are Your Sure?',
-				icon: 'question',
-
+				icon: 'warning',
+				text: "You won't be able to revert this!",
 				showDenyButton: true,
 
 				focusConfirm: false,
-				confirmButtonText: '<i class="fa fa-thumbs-up"></i> Yes',
+				confirmButtonText: '<i class="fa fa-thumbs-up"></i> Yes ,delete it',
 				confirmButtonAriaLabel: 'Thumbs up, great!',
-				denyButtonText: '<i class="fa fa-thumbs-down">No</i>',
+				denyButtonText: '<i class="fa fa-thumbs-down"> Cancel</i>',
 				denyButtonAriaLabel: 'Thumbs down',
 			}).then((result) => {
 				if (result.isConfirmed) {
@@ -394,55 +394,53 @@ export const deleteCertification = (id) => {
 //Delete account and profile
 export const deleteUserAccount = () => {
 	return (dispatch) => {
-		{
-			try {
-				Swal.fire({
-					title: 'Are Your Sure?',
-					icon: 'question',
+		try {
+			Swal.fire({
+				title: 'Are Your Sure?',
+				icon: 'warning',
+				text: "You won't be able to revert this!",
+				showDenyButton: true,
 
-					showDenyButton: true,
-
-					focusConfirm: false,
-					confirmButtonText: '<i class="fa fa-thumbs-up"></i> Yes',
-					confirmButtonAriaLabel: 'Thumbs up, great!',
-					denyButtonText: '<i class="fa fa-thumbs-down">No</i>',
-					denyButtonAriaLabel: 'Thumbs down',
-				}).then((result) => {
-					if (result.isConfirmed) {
-						axios
-							.delete('/profile', {
-								headers: {
-									Authorization: localStorage.getItem('authToken'),
-								},
+				focusConfirm: false,
+				confirmButtonText: '<i class="fa fa-thumbs-up"></i> Yes, delete it!',
+				confirmButtonAriaLabel: 'Thumbs up, great!',
+				denyButtonText: '<i class="fa fa-thumbs-down"> Cancel</i>',
+				denyButtonAriaLabel: 'Thumbs down',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					axios
+						.delete('/profile', {
+							headers: {
+								Authorization: localStorage.getItem('authToken'),
+							},
+						})
+						.then(() => {
+							dispatch(clearAllProfile())
+							dispatch(deleteAccount())
+							Swal.fire({
+								text: 'Your Account Has Been Deleted Permanently',
+								showConfirmButton: false,
+								icon: 'error',
+								toast: true,
+								timer: 2000,
+								position: 'top',
 							})
-							.then((response) => {
-								dispatch(clearAllProfile())
-								dispatch(deleteAccount())
-								Swal.fire({
-									text: 'Your Account Has Been Deleted Permanently',
-									showConfirmButton: false,
-									icon: 'error',
-									toast: true,
-									timer: 2000,
-									position: 'top',
-								})
 
-								window.location.href = '/'
-							})
-							.catch((err) => {
-								const errors = err.response.data.errors
+							window.location.href = '/'
+						})
+						.catch((err) => {
+							const errors = err.response.data.errors
 
-								if (errors) {
-									errors.forEach((error) =>
-										dispatch(setAlert(error.msg, 'danger'))
-									)
-								}
-							})
-					}
-				})
-			} catch (err) {
-				console.log(err)
-			}
+							if (errors) {
+								errors.forEach((error) =>
+									dispatch(setAlert(error.msg, 'danger'))
+								)
+							}
+						})
+				}
+			})
+		} catch (err) {
+			console.log(err)
 		}
 	}
 }

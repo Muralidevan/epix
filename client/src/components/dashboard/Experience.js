@@ -23,6 +23,7 @@ const Experience = ({ experience, deleteExperience }) => {
 					onClick={() => deleteExperience(exp._id)}
 					className='btn btn-danger'
 				>
+					<i className='fa fa-trash' aria-hidden='true' />
 					Delete
 				</button>
 			</td>
@@ -35,9 +36,27 @@ const Experience = ({ experience, deleteExperience }) => {
 			<table className='table'>
 				<thead>
 					<tr>
-						<th>Company Name</th>
-						<th className='hide-sm'>Job Title</th>
-						<th className='hide-sm'>Duration</th>
+						<th style={{ background: '#c0c0c0', color: '#333' }}>
+							<i className='fa fa-building text-primary' aria-hidden='true'></i>
+							&nbsp;Company Name
+						</th>
+						<th
+							className='hide-sm'
+							style={{ background: '#c0c0c0', color: '#333' }}
+						>
+							<i
+								className='fa fa-briefcase  text-primary'
+								aria-hidden='true'
+							></i>
+							&nbsp;Job Title
+						</th>
+						<th
+							className='hide-sm'
+							style={{ background: '#c0c0c0', color: '#333' }}
+						>
+							<i className='fa fa-clock-o text-primary' aria-hidden='true'></i>
+							&nbsp;Duration
+						</th>
 					</tr>
 				</thead>
 				<tbody>{experiences}</tbody>
