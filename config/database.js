@@ -3,11 +3,11 @@ const config = require('config')
 
 const db = config.get('mongoURI')
 mongoose.Promise = global.Promise
-const CONNECTION_URI = process.env.MONGODB_URI || db
+// const CONNECTION_URI = process.env.MONGODB_URI || db
 
 const connectDB = () => {
 	mongoose
-		.connect(CONNECTION_URI, {
+		.connect(db, {
 			useNewUrlParser: true,
 			useCreateIndex: true,
 			useFindAndModify: false,
