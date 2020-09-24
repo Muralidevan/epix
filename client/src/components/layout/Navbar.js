@@ -3,18 +3,44 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { startUserLogout } from '../../actions/userAction'
+import Swal from 'sweetalert2'
 
-const Navbar = ({ user: { isAuthenticated }, startUserLogout }) => {
+const Navbar = ({
+	user: { isAuthenticated, loading },
+	user: { user },
+	startUserLogout,
+}) => {
 	const handleLogout = () => {
-		startUserLogout()
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top',
+			showConfirmButton: false,
+			timer: 3000,
+
+			onOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			},
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: 'Signed Out Successfully',
+		})
+		setTimeout(() => startUserLogout(), 3000)
 	}
+	// if (!loading) {
+	// 	console.log(user._id, 'user')
+	// }
 
 	const authLinks = (
 		<ul>
 			<li>
-				<Link to='/gallery'>
-					<i className='fa fa-picture-o' aria-hidden='true'></i>&nbsp;GALLERY
-				</Link>
+				{!loading && (
+					<Link to={`/gallery/${user._id}`}>
+						<i className='fa fa-picture-o' aria-hidden='true'></i>&nbsp;GALLERY
+					</Link>
+				)}
 			</li>
 			<li>
 				<Link to='/profiles'>

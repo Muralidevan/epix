@@ -246,6 +246,18 @@ img {
 .round-img {
 	margin-top: 10%;
 	border-radius: 50%;
+	width: 20px;
+	height: 100px;
+}
+.round-img-2 {
+	margin-top: 10%;
+	border-radius: 50%;
+	height: 200px;
+}
+
+.round-img-3 {
+	height: 200px;
+	border-radius: 50%;
 }
 
 .line {
@@ -472,6 +484,16 @@ button {
 	background-color: #edf0f1;
 	align-items: center;
 }
+/* .dialog {
+	box-shadow: 0 0 10px var(--primary-color);
+	position: relative;
+	width: 1100px;
+	height: 700px;
+}
+.image {
+	width: 300px;
+} */
+
 .post-image {
 	color: black;
 	margin: 1rem 0;
@@ -678,6 +700,8 @@ button {
 }
 
 .post {
+	/* width: 1000px;
+	height: 900px; */
 	background-color: #fdfefe;
 	/* border: none; */
 	/* position: relative; */

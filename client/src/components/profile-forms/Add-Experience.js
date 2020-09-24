@@ -88,7 +88,6 @@ const AddExperience = ({ addExperience, history }) => {
 							onChange={() => {
 								setFormData({ ...formData, current: !current })
 							}}
-							required
 						/>{' '}
 						Current Job
 					</p>

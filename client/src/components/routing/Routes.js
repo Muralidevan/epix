@@ -28,7 +28,7 @@ const Routes = () => {
 				<Route exact path='/profiles' component={Profiles} />
 				<Route exact path='/profile/:id' component={Profile} />
 
-				<PrivateRoute exact path='/gallery' component={Album} />
+				<PrivateRoute exact path='/gallery/:id' component={Album} />
 				<PrivateRoute exact path='/dashboard' component={Dashboard} />
 				<PrivateRoute exact path='/create-profile' component={CreateProfile} />
 				<PrivateRoute exact path='/profile-picture' component={ProfilePic} />

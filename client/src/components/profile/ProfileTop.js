@@ -16,9 +16,9 @@ const ProfileTop = ({
 	return (
 		<div className='profile-top bg-primary p-2'>
 			{profilePic ? (
-				<img className='round-img my-1' src={profilePic} alt='' />
+				<img className='round-img-3 my-1' src={profilePic} alt='' />
 			) : (
-				<img src={avatar} alt='' className='round-img' />
+				<img src={avatar} alt='' className='round-img-3' />
 			)}
 			<h1 className='large'>{username}</h1>
 			<p className='lead'>

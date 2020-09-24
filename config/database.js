@@ -5,7 +5,7 @@ const db = config.get('mongoURI')
 
 const connectDB = () => {
 	mongoose
-		.connect('mongodb://localhost:27017/epix', {
+		.connect(db, {
 			useNewUrlParser: true,
 			useCreateIndex: true,
 			useFindAndModify: false,

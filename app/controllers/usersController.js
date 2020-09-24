@@ -1,6 +1,8 @@
 const User = require('../models/User')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const config = require('config')
+
 const { validationResult } = require('express-validator')
 const usersController = {}
 
@@ -74,8 +76,8 @@ usersController.login = (req, res) => {
 							},
 							//return user.generateToken()
 						}
-						const token = jwt.sign(tokenData, 'epix123', {
-							expiresIn: '5 days',
+						const token = jwt.sign(tokenData, config.get('jwtSecret'), {
+							expiresIn: 3600,
 						})
 						res.json({
 							token: `Bearer ${token}`,

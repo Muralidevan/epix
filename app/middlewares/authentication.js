@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
+const config = require('config')
 const authenticateUser = (req, res, next) => {
 	//get token from header
 	//console.log(req.header('Authorization'))
@@ -7,7 +8,7 @@ const authenticateUser = (req, res, next) => {
 
 	try {
 		//verify token
-		jwt.verify(token, 'epix123', (error, decoded) => {
+		jwt.verify(token, config.get('jwtSecret'), (error, decoded) => {
 			if (error) {
 				return res.status(401).json({ msg: 'Token is not valid' })
 			} else {

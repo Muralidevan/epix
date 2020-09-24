@@ -12,6 +12,7 @@
 		"react-dom": "^16.13.1",
 		"react-grid-gallery": "^0.5.5",
 		"react-images": "^1.1.7",
+		"react-modal-image": "^2.5.0",
 		"react-moment": "^0.9.7",
 		"react-redux": "^7.2.1",
 		"react-router-dom": "^5.2.0",

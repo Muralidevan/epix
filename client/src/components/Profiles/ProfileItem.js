@@ -9,9 +9,9 @@ const ProfileItem = ({
 	return (
 		<div className='profile bg-light'>
 			{profilePic ? (
-				<img src={profilePic} alt='' className='round-img' />
+				<img src={profilePic} alt='' className='round-img-2' />
 			) : (
-				<img src={avatar} alt='' className='round-img' />
+				<img src={avatar} alt='' className='round-img-2' />
 			)}
 			<div>
 				{user ? <h2>{user.username}</h2> : ''}

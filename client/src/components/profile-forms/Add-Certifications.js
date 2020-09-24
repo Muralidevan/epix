@@ -100,7 +100,6 @@ const AddCertification = ({ addCertification, history }) => {
 							onChange={() => {
 								setFormData({ ...formData, current: !current })
 							}}
-							required
 						/>{' '}
 						Current
 					</p>

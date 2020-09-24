@@ -1,6 +1,7 @@
 import axios from '../Config/axios'
 import { setAlert } from './alertAction'
 import Swal from 'sweetalert2'
+
 import { clearProfile } from '../actions/profileAction'
 
 export const setUser = (user) => {
@@ -139,23 +140,6 @@ export const startUserLogout = () => {
 		dispatch(setUser({}))
 
 		dispatch(logOut())
-		const Toast = Swal.mixin({
-			toast: true,
-			position: 'top',
-			showConfirmButton: false,
-			timer: 5000,
-
-			onOpen: (toast) => {
-				toast.addEventListener('mouseenter', Swal.stopTimer)
-				toast.addEventListener('mouseleave', Swal.resumeTimer)
-			},
-		})
-
-		Toast.fire({
-			icon: 'success',
-			title: 'Signed Out Successfully',
-		})
-
 		window.location.href = '/'
 	}
 }
