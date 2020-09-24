@@ -1,4 +1,0 @@
-{
-	"mongoURI": "mongodb+srv://Murali:murali123@epix.tngmi.mongodb.net/<dbname>?retryWrites=true&w=majority",
-	"jwtSecret": "epix123"
-}

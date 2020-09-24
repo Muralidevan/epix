@@ -5,6 +5,8 @@ const connectDB = require('./config/database')
 const router = require('./config/routes')
 const path = require('path')
 
+const cors = require('cors')
+
 const app = express()
 
 // var cors = require('cors')
@@ -14,6 +16,7 @@ const app = express()
 connectDB()
 
 app.use(express.json())
+app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(router)
 app.use('/public', express.static('public'))
