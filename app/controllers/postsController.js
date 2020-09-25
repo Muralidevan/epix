@@ -48,8 +48,6 @@ postsController.create = (req, res) => {
 						//img
 
 						user: req.user.id,
-					}).catch((err) => {
-						console.error(err.message)
 					})
 					newPost
 						.save()

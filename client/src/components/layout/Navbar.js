@@ -15,7 +15,7 @@ const Navbar = ({
 			toast: true,
 			position: 'top',
 			showConfirmButton: false,
-			timer: 3000,
+			timer: 2000,
 
 			onOpen: (toast) => {
 				toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -27,7 +27,7 @@ const Navbar = ({
 			icon: 'success',
 			title: 'Signed Out Successfully',
 		})
-		setTimeout(() => startUserLogout(), 3000)
+		setTimeout(() => startUserLogout(), 1000)
 	}
 	// if (!loading) {
 	// 	console.log(user._id, 'user')
@@ -73,11 +73,11 @@ const Navbar = ({
 	)
 	const guestLinks = (
 		<ul>
-			<li>
+			{/* <li>
 				<Link to='/profiles'>
 					<i className='fa fa-camera' aria-hidden='true'></i>&nbsp;PHOTOGRAPHERS
 				</Link>
-			</li>
+			</li> */}
 			<li>
 				<Link to='/register'>
 					<i className='fa fa-handshake-o' aria-hidden='true'></i>&nbsp;SIGNUP
