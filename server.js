@@ -16,18 +16,17 @@ connectDB()
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
-app.use(router)
+app.use('/api', router)
 app.use('/public', express.static('public'))
 
 //serve static assests in production
-if (process.env.NODE_ENV === 'production') {
-	//Set static folder
-	app.use(express.static(path.join(__dirname, 'client/build')))
 
-	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname + '/client/build/index.html'))
-	})
-}
+//Set static folder
+app.use(express.static(path.join(__dirname, 'client/build')))
+
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 const PORT = process.env.PORT || 3055
 
