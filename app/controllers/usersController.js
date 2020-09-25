@@ -102,6 +102,9 @@ usersController.account = (req, res) => {
 			.then((user) => {
 				res.json(user)
 			})
+			.catch((err) => {
+				console.error(err.message)
+			})
 	} catch (err) {
 		console.error(err.message)
 		res.status(500).send('Server Error')

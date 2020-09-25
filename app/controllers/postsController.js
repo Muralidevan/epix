@@ -48,6 +48,8 @@ postsController.create = (req, res) => {
 						//img
 
 						user: req.user.id,
+					}).catch((err) => {
+						console.error(err.message)
 					})
 					newPost
 						.save()
@@ -180,21 +182,27 @@ postsController.createComment = (req, res) => {
 		User.findById(req.user.id)
 			.select('-password')
 			.then((user) => {
-				Post.findById(req.params.id).then((post) => {
-					Profile.findOne({ user: req.user.id }).then((profile) => {
-						const newComment = {
-							text: req.body.text,
-							//name coming from the user
-							username: user.username,
-							user: req.user.id,
-							profilePic: profile.profilePic,
-						}
+				Post.findById(req.params.id)
+					.then((post) => {
+						Profile.findOne({ user: req.user.id }).then((profile) => {
+							const newComment = {
+								text: req.body.text,
+								//name coming from the user
+								username: user.username,
+								user: req.user.id,
+								profilePic: profile.profilePic,
+							}.catch((err) => {
+								console.error(err.message)
+							})
 
-						post.comments.unshift(newComment)
-						post.save()
-						res.json(post.comments)
+							post.comments.unshift(newComment)
+							post.save()
+							res.json(post.comments)
+						})
 					})
-				})
+					.catch((err) => {
+						console.error(err.message)
+					})
 			})
 			.catch((err) => res.status(404).json(err))
 	} catch (err) {
@@ -204,26 +212,30 @@ postsController.createComment = (req, res) => {
 }
 postsController.deleteComment = (req, res) => {
 	try {
-		Post.findById(req.params.id).then((post) => {
-			// Get comment
-			const comment = post.comments.find(
-				(comment) => comment.id === req.params.comment_id
-			)
-			// To Check if comment exists or not
-			if (!comment) {
-				return res.status(200).json({ msg: 'Comment does not exist' })
-			}
-			// Check user and because comment.user gives ObjectId -use toString()
-			if (comment.user.toString() !== req.user.id) {
-				return res.status(200).json({ msg: 'User not authorized' })
-			}
+		Post.findById(req.params.id)
+			.then((post) => {
+				// Get comment
+				const comment = post.comments.find(
+					(comment) => comment.id === req.params.comment_id
+				)
+				// To Check if comment exists or not
+				if (!comment) {
+					return res.status(200).json({ msg: 'Comment does not exist' })
+				}
+				// Check user and because comment.user gives ObjectId -use toString()
+				if (comment.user.toString() !== req.user.id) {
+					return res.status(200).json({ msg: 'User not authorized' })
+				}
 
-			post.comments = post.comments.filter(
-				({ id }) => id !== req.params.comment_id
-			)
-			post.save()
-			res.json(post.comments)
-		})
+				post.comments = post.comments.filter(
+					({ id }) => id !== req.params.comment_id
+				)
+				post.save()
+				res.json(post.comments)
+			})
+			.catch((err) => {
+				console.error(err.message)
+			})
 	} catch (err) {
 		console.error(err.message)
 		res.status(500).send('Server error')

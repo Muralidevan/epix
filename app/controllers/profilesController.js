@@ -71,7 +71,7 @@ profilesController.create = (req, res) => {
 	try {
 		Profile.findOne({ user: req.user.id })
 			.then((profile) => {
-				console.log(profile)
+				//console.log(profile)
 				// Update
 				if (profile) {
 					Profile.findOneAndUpdate(
@@ -163,7 +163,12 @@ profilesController.profileExperience = (req, res) => {
 				// Add to exp array newest first(unshift)
 				profile.experience.unshift(newExp)
 
-				profile.save().then((profile) => res.json(profile))
+				profile
+					.save()
+					.then((profile) => res.json(profile))
+					.catch((err) => {
+						console.error(err.message)
+					})
 			})
 			.catch((err) => res.json(err.message))
 	} catch (err) {
@@ -184,7 +189,7 @@ profilesController.profilePicture = (req, res) => {
 			'/public/uploads/' +
 			req.file.filename
 	}
-	console.log(imagePath)
+	//console.log(imagePath)
 	//Build profile object
 
 	profilePic = imagePath
@@ -232,7 +237,12 @@ profilesController.destroyExperience = (req, res) => {
 				// profile.experience.splice(removeIndex, 1)
 
 				// Save
-				profile.save().then((profile) => res.json(profile))
+				profile
+					.save()
+					.then((profile) => res.json(profile))
+					.catch((err) => {
+						console.error(err.message)
+					})
 			})
 			.catch((err) => res.status(404).json(err))
 	} catch (err) {
@@ -267,7 +277,12 @@ profilesController.profileCertifications = (req, res) => {
 				// Add to Certifications array newest first(unshift)
 				profile.certifications.unshift(newCer)
 
-				profile.save().then((profile) => res.json(profile))
+				profile
+					.save()
+					.then((profile) => res.json(profile))
+					.catch((err) => {
+						console.error(err.message)
+					})
 			})
 			.catch((err) => res.json(err.message))
 	} catch (err) {
@@ -285,7 +300,12 @@ profilesController.destroyCertifications = (req, res) => {
 				)
 
 				// Save
-				profile.save().then((profile) => res.json(profile))
+				profile
+					.save()
+					.then((profile) => res.json(profile))
+					.catch((err) => {
+						console.error(err.message)
+					})
 			})
 			.catch((err) => res.status(404).json(err))
 	} catch (err) {

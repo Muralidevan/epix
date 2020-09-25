@@ -20,6 +20,7 @@ const userReducer = (state = userInitialState, action) => {
 				...state,
 				user: null,
 				profile: null,
+				post: null,
 				isAuthenticated: false,
 				loading: false,
 			}
