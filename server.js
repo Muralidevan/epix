@@ -9,10 +9,8 @@ const cors = require('cors')
 
 const app = express()
 
-// var cors = require('cors')
-
 //connect Database
-// app.use(cors())
+
 connectDB()
 
 app.use(express.json())
