@@ -29,9 +29,6 @@ const Navbar = ({
 		})
 		setTimeout(() => startUserLogout(), 1000)
 	}
-	// if (!loading) {
-	// 	console.log(user._id, 'user')
-	// }
 
 	const authLinks = (
 		<ul>
@@ -64,9 +61,11 @@ const Navbar = ({
 			</li>
 			<li>
 				<Link to='/' onClick={handleLogout}>
-					<i className='fas fa-sign-out-alt'></i>
-					{''}
-					<span className='hide-sm'>&nbsp;SIGNOUT</span>
+					<i className='fas fa-sign-out-alt'>
+						{''}
+						<span className='hide-sm'></span>
+					</i>
+					&nbsp;SIGNOUT
 				</Link>
 			</li>
 		</ul>

@@ -2,16 +2,10 @@ import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import Gallery from 'react-photo-gallery'
 import Gallery from 'react-grid-gallery'
-
-// import Carousel, { Modal, ModalGateway } from 'react-images'
 import { getPosts } from '../../actions/postAction'
 
 const Album = ({ getPosts, post: { posts }, match }) => {
-	// const [currentImage, setCurrentImage] = useState(0)
-	// const [viewerIsOpen, setViewerIsOpen] = useState(false)
-
 	useEffect(() => {
 		getPosts()
 	}, [getPosts])
@@ -93,7 +87,7 @@ const Album = ({ getPosts, post: { posts }, match }) => {
 				EPIX&nbsp;&nbsp;<i className='fa fa-camera' aria-hidden='true'></i>
 				&nbsp; GALLERY
 			</h1>
-			<div className='bg-primary p' style={{ width: '30%' }}>
+			<div className='bg-gallery p'>
 				<h3>Photos Clicked By You...</h3>
 			</div>
 
@@ -103,13 +97,14 @@ const Album = ({ getPosts, post: { posts }, match }) => {
 					<Gallery
 						images={IMAGES}
 						// enableLightbox={true}
+						alt='not found'
 						enableImageSelection={false}
 					/>
 				</div>
 			</div>
 			<Fragment>
 				<br />
-				<div className='bg-primary p' style={{ width: '50%' }}>
+				<div className='bg-gallery p'>
 					<h3>Photos Clicked By Other PhotoGraphers...</h3>
 				</div>
 
@@ -118,6 +113,7 @@ const Album = ({ getPosts, post: { posts }, match }) => {
 					<div className='gallery-group'>
 						<Gallery
 							images={GlobIMAGES}
+							alt='not found'
 							// enableLightbox={true}
 							enableImageSelection={false}
 						/>
