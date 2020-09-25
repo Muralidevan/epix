@@ -34,7 +34,7 @@ const CommentForm = ({ postId, startAddComment }) => {
 					type='submit'
 					className='btn btn-dark my-1'
 					style={{ margin: '0,1rem', display: 'block' }}
-					value='Submit'
+					value='Comment'
 				/>
 			</form>
 		</div>

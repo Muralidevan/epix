@@ -259,11 +259,7 @@ export const startAddComment = (postId, formdata) => {
 					})
 				})
 				.catch((err) => {
-					const errors = err.response.data.errors
-
-					if (errors) {
-						errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
-					}
+					console.log(err)
 				})
 		} catch (err) {
 			console.log(err)

@@ -189,9 +189,7 @@ postsController.createComment = (req, res) => {
 								username: user.username,
 								user: req.user.id,
 								profilePic: profile.profilePic,
-							}.catch((err) => {
-								console.error(err.message)
-							})
+							}
 
 							post.comments.unshift(newComment)
 							post.save()

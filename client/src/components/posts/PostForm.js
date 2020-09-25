@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { startAddPost } from '../../actions/postAction'
 import Swal from 'sweetalert2'
 
-const PostForm = ({ startAddPost, profile: { profilePic } }) => {
+const PostForm = ({ startAddPost }) => {
 	const initialState = {
 		text: '',
 		iso: 'auto',
@@ -238,6 +238,10 @@ const PostForm = ({ startAddPost, profile: { profilePic } }) => {
 						required
 						style={{ width: '61%' }}
 					/>
+					<p className='lead-note'>
+						<i className='fa fa-exclamation-triangle' /> Note: Create Your
+						Profile To Upload
+					</p>
 					{len ? (
 						<input
 							type='submit'

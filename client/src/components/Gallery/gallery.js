@@ -61,23 +61,25 @@ const Album = ({ getPosts, post: { posts }, match }) => {
 		})
 	let gsrc
 
-	posts.map((ele) => {
-		gsrc = ele.imgsrc
-		const thumbnail = ele.imgsrc
-		const caption = ele.text
+	posts
+		.filter((ele) => ele.user !== match.params.id)
+		.map((ele) => {
+			gsrc = ele.imgsrc
+			const thumbnail = ele.imgsrc
+			const caption = ele.text
 
-		// console.log(typeof src[0])
-		// arr.splice(index, 0, item);
-		GlobIMAGES.push({
-			src: gsrc,
-			thumbnail: thumbnail,
-			thumbnailWidth: 500,
-			thumbnailHeight: 350,
+			// console.log(typeof src[0])
+			// arr.splice(index, 0, item);
+			GlobIMAGES.push({
+				src: gsrc,
+				thumbnail: thumbnail,
+				thumbnailWidth: 500,
+				thumbnailHeight: 350,
 
-			caption,
+				caption,
+			})
+			return IMAGES
 		})
-		return IMAGES
-	})
 
 	// console.log(IMAGES)
 

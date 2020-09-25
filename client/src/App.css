@@ -790,6 +790,9 @@ button {
 	.lead {
 		font-size: 1rem;
 	}
+	.lead-note {
+		font-size: 0.5rem;
+	}
 
 	/* Navbar */
 	.navbar {
