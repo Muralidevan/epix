@@ -34,6 +34,9 @@ export const getCurrentProfile = () => {
 					const profile = response.data
 					dispatch(getProfile(profile))
 				})
+				.catch((err) => {
+					console.log(err)
+				})
 		} catch (err) {
 			dispatch({
 				type: 'PROFILE_ERROR',
@@ -57,6 +60,9 @@ export const getAllUserProfile = () => {
 					const profile = response.data
 					dispatch(getAllProfiles(profile))
 				})
+				.catch((err) => {
+					console.log(err)
+				})
 		} catch (err) {
 			dispatch({
 				type: 'PROFILE_ERROR',
@@ -79,6 +85,9 @@ export const getProfileById = (userId) => {
 				.then((response) => {
 					const profile = response.data
 					dispatch(getProfile(profile))
+				})
+				.catch((err) => {
+					console.log(err)
 				})
 		} catch (err) {
 			dispatch({
@@ -125,18 +134,7 @@ export const createProfile = (form, history, edit = false) => {
 					}
 				})
 				.catch((err) => {
-					const errors = err.response.data.errors
-
-					if (errors) {
-						errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
-					}
-					// dispatch({
-					// 	type: 'PROFILE_ERROR',
-					// 	payload: {
-					// 		msg: err.response.statusText,
-					// 		status: err.response.status,
-					// 	},
-					// })
+					console.log(err)
 				})
 		} catch (err) {
 			console.log(err)
@@ -178,18 +176,7 @@ export const createProfilePic = (form, history, edit = false) => {
 					}
 				})
 				.catch((err) => {
-					const errors = err.response.data.errors
-
-					if (errors) {
-						errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
-					}
-					// dispatch({
-					// 	type: 'PROFILE_ERROR',
-					// 	payload: {
-					// 		msg: err.response.statusText,
-					// 		status: err.response.status,
-					// 	},
-					// })
+					console.log(err)
 				})
 		} catch (err) {
 			console.log(err)
@@ -268,11 +255,9 @@ export const addCertification = (formData, history) => {
 					history.push('/dashboard')
 				})
 				.catch((err) => {
-					const errors = err.response.data.errors
-
-					if (errors) {
-						errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
-					}
+					err.response.data.errors.catch((err) => {
+						console.log(err)
+					})
 				})
 		} catch (err) {
 			console.log(err)
@@ -320,13 +305,9 @@ export const deleteExperience = (id) => {
 							//	history.push('/dashboard')
 						})
 						.catch((err) => {
-							const errors = err.response.data.errors
-
-							if (errors) {
-								errors.forEach((error) =>
-									dispatch(setAlert(error.msg, 'danger'))
-								)
-							}
+							err.response.data.errors.catch((err) => {
+								console.log(err)
+							})
 						})
 				}
 			})
@@ -375,14 +356,9 @@ export const deleteCertification = (id) => {
 
 							//history.push('/dashboard')
 						})
-						.catch((err) => {
-							const errors = err.response.data.errors
 
-							if (errors) {
-								errors.forEach((error) =>
-									dispatch(setAlert(error.msg, 'danger'))
-								)
-							}
+						.catch((err) => {
+							console.log(err)
 						})
 				}
 			})

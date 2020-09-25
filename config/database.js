@@ -20,8 +20,6 @@ const connectDB = () => {
 		})
 		.catch((err) => {
 			console.error(err.Message)
-
-			process.exit(1)
 		})
 }
 

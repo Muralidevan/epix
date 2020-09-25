@@ -8,6 +8,7 @@ const path = require('path')
 const cors = require('cors')
 
 const app = express()
+const PORT = process.env.PORT || 3055
 
 //connect Database
 
@@ -16,7 +17,7 @@ connectDB()
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
-app.use('/api', router)
+app.use(router)
 app.use('/public', express.static('public'))
 
 //serve static assests in production
@@ -27,8 +28,6 @@ app.use(express.static(path.join(__dirname, 'client/build')))
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
-
-const PORT = process.env.PORT || 3055
 
 app.listen(PORT, () => {
 	console.log('server running successfully on Port', PORT)
