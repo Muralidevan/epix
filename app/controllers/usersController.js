@@ -76,7 +76,7 @@ usersController.login = (req, res) => {
 							},
 							//return user.generateToken()
 						}
-						const token = jwt.sign(tokenData, config.get('jwtSecret'), {
+						const token = jwt.sign(tokenData, 'epix123', {
 							expiresIn: 3600,
 						})
 						res.json({

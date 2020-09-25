@@ -3,12 +3,13 @@ const User = require('../models/User')
 const config = require('config')
 const authenticateUser = (req, res, next) => {
 	//get token from header
+	// config.get('jwtSecret')
 	//console.log(req.header('Authorization'))
 	const token = req.header('Authorization').split(' ')[1]
 
 	try {
 		//verify token
-		jwt.verify(token, config.get('jwtSecret'), (error, decoded) => {
+		jwt.verify(token, 'epix123', (error, decoded) => {
 			if (error) {
 				return res.status(401).json({ msg: 'Token is not valid' })
 			} else {

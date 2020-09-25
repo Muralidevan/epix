@@ -1,11 +1,15 @@
 const mongoose = require('mongoose')
-const config = require('config')
+// const config = require('config')
 
-const db = config.get('mongoURI')
+// const db = config.get('mongoURI')
+
+mongoose.Promise = global.Promise
+const CONNECTION_URI =
+	process.env.MONGODB_URI || 'mongodb://localhost:27017/epix'
 
 const connectDB = () => {
 	mongoose
-		.connect(db, {
+		.connect(CONNECTION_URI, {
 			useNewUrlParser: true,
 			useCreateIndex: true,
 			useFindAndModify: false,
