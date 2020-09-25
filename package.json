@@ -9,7 +9,10 @@
 		"start": "serve -s build",
 		"server": "nodemon server",
 		"build": "react-scripts build",
-		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject",
+		"heroku-postbuild": "npm run build"
+		
 	},
 	"engines": {
 		"node": "^12.15.0",
