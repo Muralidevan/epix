@@ -132,6 +132,11 @@ img {
 	text-align: center;
 	margin: 1rem 0;
 }
+.my-2 {
+	font-size: 1.5rem;
+	text-align: left;
+	margin: 1rem 0;
+}
 
 .my-2 {
 	margin: 2rem 0;
@@ -289,6 +294,13 @@ img {
 
 .form .form-group {
 	text-align-last: left;
+	border: none;
+	margin: 1.2rem 0;
+	background-color: #edf0f1;
+}
+.form .form-group-text {
+	text-align-last: left;
+	width: 61%;
 	border: none;
 	margin: 1.2rem 0;
 	background-color: #edf0f1;
@@ -700,23 +712,16 @@ button {
 }
 
 .post {
-	/* width: 1000px;
-	height: 900px; */
 	background-color: #fdfefe;
-	/* border: none; */
-	/* position: relative; */
 	display: grid;
 	grid-template-columns: 1fr;
 	text-align-last: left;
-	/* border-color: var(--primary-color); */
 	box-shadow: 0 0 10px var(--primary-color);
-	/* grid-gap: 0.2rem; */
 }
 .post .post-group {
 	display: flex;
 	background-color: #fdfefe;
 	width: auto;
-
 	text-align-last: left;
 }
 .post div:last-child {
@@ -793,14 +798,24 @@ button {
 	.lead-note {
 		font-size: 0.5rem;
 	}
+	.my-2 {
+		font-size: 1.5rem;
+		text-align: center;
+		margin: 1rem 0;
+	}
 
+	.round-img {
+		display: grid;
+		margin-top: 1%;
+		border-radius: 50%;
+	}
 	/* Navbar */
 	.navbar {
 		display: block;
 		text-align: center;
 	}
 	.navbar a {
-		font-size: 0.67rem;
+		font-size: 0.73rem;
 	}
 
 	.navbar ul {
@@ -834,6 +849,12 @@ button {
 
 		/* padding: 0.4rem; */
 	}
+	.form .form-group-profile {
+		display: block;
+		background-color: #edf0f1;
+		width: 80%;
+		justify-content: space-between;
+	}
 
 	.form input[type='date'],
 	.form select,
@@ -843,6 +864,30 @@ button {
 	}
 	.form .form-group-profile-edit input[type='text'] {
 		width: 100%;
+	}
+	.form .form-group-text {
+		text-align-last: left;
+		border: none;
+		width: 90%;
+		margin: 1.2rem 0;
+		background-color: #edf0f1;
+	}
+
+	.post .post-group {
+		display: block;
+		position: relative;
+		background-color: #fdfefe;
+		width: 100%;
+		margin-top: 1px;
+		text-align-last: left;
+	}
+	.post .post-group-2 {
+		margin-top: 1px;
+		position: relative;
+		width: 100%;
+		text-align: left;
+		background-color: #fdfefe;
+		padding: 10px;
 	}
 
 	/*tables mobiles*/
@@ -908,7 +953,11 @@ button {
 	}
 
 	.post {
+		background-color: #fdfefe;
+		display: grid;
 		grid-template-columns: 1fr;
+		text-align-last: left;
+		box-shadow: 0 0 10px var(--primary-color);
 	}
 	.post a,
 	.post button {

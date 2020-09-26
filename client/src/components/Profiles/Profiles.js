@@ -20,7 +20,7 @@ const Profiles = ({ getAllUserProfile, profile: { profiles, loading } }) => {
 						Photographers
 					</h1>
 					<p className='lead'>
-						<i className='fab fa-connectdevelop'></i>
+						<i className='fa fa-handshake-o'></i>
 						Browse and connect with Photographers
 					</p>
 					<div className='profiles'>

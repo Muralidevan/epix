@@ -227,16 +227,15 @@ const PostForm = ({ startAddPost }) => {
 						</select>
 					</Fragment>
 				</div>
-				<div className='form-group'>
+				<div className='form-group-text'>
 					<textarea
 						name='text'
-						cols='30'
-						rows='3'
+						cols='35'
+						rows='4'
 						placeholder='Write Something About Your Image'
 						value={text}
 						onChange={onChange}
 						required
-						style={{ width: '61%' }}
 					/>
 					<p className='lead-note'>
 						<i className='fa fa-exclamation-triangle' /> Note: Create Your

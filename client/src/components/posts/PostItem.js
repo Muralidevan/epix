@@ -56,7 +56,12 @@ const PostItem = ({
 					''
 				)}
 
-				<img src={imgsrc} alt='' style={{ width: '100%', height: '700px' }} />
+				<img
+					src={imgsrc}
+					alt=''
+					className='post-img'
+					style={{ width: '100%', height: '700px' }}
+				/>
 
 				{showActions && (
 					<Fragment>
@@ -123,6 +128,7 @@ const PostItem = ({
 							<i className='fas fa-thumbs-down' />
 						</button>
 						<Link to={`/posts/${_id}`} className='btn btn-primary'>
+							<i className='fa fa-comments' aria-hidden='true'></i> {''}
 							Comments{' '}
 							{comments.length > 0 && (
 								<span className='comment-count'>{comments.length}</span>

@@ -24,9 +24,7 @@ const ProfileItem = ({
 								{company && <span> at {company}</span>}
 							</p>
 
-							<p className='my-1' style={{ textAlignLast: 'left' }}>
-								{location && <span> at {location}</span>}
-							</p>
+							<p className='my-2'>{location && <span> at {location}</span>}</p>
 
 							{user ? (
 								<Link

@@ -33,10 +33,15 @@ const Navbar = ({
 	const authLinks = (
 		<ul>
 			<li>
-				{!loading && (
-					<Link to={`/gallery/${user._id}`}>
-						<i className='fa fa-picture-o' aria-hidden='true'></i>&nbsp;GALLERY
-					</Link>
+				{user && (
+					<Fragment>
+						{!loading && (
+							<Link to={`/gallery/${user._id}`}>
+								<i className='fa fa-picture-o' aria-hidden='true'></i>
+								&nbsp;GALLERY
+							</Link>
+						)}
+					</Fragment>
 				)}
 			</li>
 			<li>
@@ -72,11 +77,6 @@ const Navbar = ({
 	)
 	const guestLinks = (
 		<ul>
-			{/* <li>
-				<Link to='/profiles'>
-					<i className='fa fa-camera' aria-hidden='true'></i>&nbsp;PHOTOGRAPHERS
-				</Link>
-			</li> */}
 			<li>
 				<Link to='/register'>
 					<i className='fa fa-handshake-o' aria-hidden='true'></i>&nbsp;SIGNUP

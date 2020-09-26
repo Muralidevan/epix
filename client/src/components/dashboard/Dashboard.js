@@ -19,6 +19,7 @@ const Dashboard = ({
 }) => {
 	useEffect(() => {
 		//startGetUser()
+
 		getCurrentProfile()
 	}, [getCurrentProfile])
 	return (

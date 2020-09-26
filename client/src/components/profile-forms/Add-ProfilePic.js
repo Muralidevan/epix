@@ -82,9 +82,9 @@ const ProfilePic = ({
 		if (len) {
 			form.append('profilePic', updatedProfilePic)
 		}
-		for (const [key, value] of form) {
-			console.log('values', key, value)
-		}
+		// for (const [key, value] of form) {
+		// 	console.log('values', key, value)
+		// }
 		// form.append('profilePic', profilePic)
 
 		createProfilePic(form, history, profile ? true : false)
