@@ -6,6 +6,10 @@ import PropTypes from 'prop-types'
 const Landing = ({ isAuthenticated }) => {
 	if (isAuthenticated) {
 		return <Redirect to='/dashboard' />
+	} else {
+		if (localStorage.getItem('authToken')) {
+			localStorage.removeItem('authToken')
+		}
 	}
 	return (
 		<section className='landing'>
