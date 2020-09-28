@@ -25,7 +25,11 @@ Open the [LIVE DEMO](https://epix-pictures.herokuapp.com/) to try Epix Pictures 
 * User Profile 
   * Users have access to moderate their public profile.
   * Users can perform CRUD operation on thier profile.
-  * Users can view other user profiles. 
+* Photographers
+   * Each photographer has his own individual profile.
+   * All photographers are listed in photographers module.
+   * Photographer can view other photographers profiles.
+   * Individual photographer profile includes his details along with thier social links.
 * Posts
   * Authenticated users can perform CRD on posts created by them. 
   * Posts list sorted to show latest posts first. 
