@@ -19,26 +19,21 @@ Open the [LIVE DEMO](https://epix-pictures.herokuapp.com/) to try Epix Pictures 
 ## Features
 
 * Authentication
-   * User must signup and signin to verify their identity to use the application.
-   * Bcryptjs and JWT used for authentication.
-   * Route guarding is implemented for private routes.
-  
+    * User must signup and signin to verify their identity to use the application.
+    * Bcryptjs and JWT used for authentication.
+    * Route guarding is implemented for private routes.  
 * User Profile 
   * Users have access to moderate their public profile.
   * Users can perform CRUD operation on thier profile.
   * Users can view other user profiles. 
-
 * Posts
   * Authenticated users can perform CRD on posts created by them. 
-  * Posts list sorted to show latest posts first.
- 
+  * Posts list sorted to show latest posts first. 
 * Commenting
   * Authenticated users can comment on the individual posts.
-  * Authenticated users can delete thier comment on the individual posts.
-  
+  * Authenticated users can delete thier comment on the individual posts.  
 * Likes
   * Authenticated users can like and unlike posts.
-
 * Gallery
   * All the photographs posted by the user are displayed in the gallery.
   * Other photographs posted by other users are also displayed in the gallery.
