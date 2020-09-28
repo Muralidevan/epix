@@ -17,15 +17,16 @@ A Full Stack Web Application for photographers to connect and share thier photog
 Open the [LIVE DEMO](https://epix-pictures.herokuapp.com/) to try Epix Pictures yourself.
 
 ## Features
-* Authentication.
-  * User must signup and signin to verify their identity to use the application.
-  * Bcryptjs and JWT used for authentication.
-  * Route guarding is implemented for private routes.
+
+* Authentication
+   * User must signup and signin to verify their identity to use the application.
+   * Bcryptjs and JWT used for authentication.
+   * Route guarding is implemented for private routes.
   
 * User Profile 
- * Users have access to moderate their public profile.
- * Users can perform CRUD operation on thier profile.
- * Users can view other user profiles. 
+  * Users have access to moderate their public profile.
+  * Users can perform CRUD operation on thier profile.
+  * Users can view other user profiles. 
 
 * Posts
   * Authenticated users can perform CRD on posts created by them. 
