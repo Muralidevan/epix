@@ -43,4 +43,36 @@ Open the [LIVE DEMO](https://epix-pictures.herokuapp.com/) to try Epix Pictures 
   * Other photographs posted by other users are also displayed in the gallery.
   * Photographs are sorted and filtered to show latest photographs first.
   
+## Screenshots
+
+### Home Page
+![homepage](https://user-images.githubusercontent.com/13749053/95952792-61ee2b00-0e16-11eb-9679-406a85ead48f.png)
+
+### SignUp Page
+![signup](https://user-images.githubusercontent.com/13749053/95952824-6e728380-0e16-11eb-8547-9cbe707bfd09.png)
+
+### SignIn Page
+![signin](https://user-images.githubusercontent.com/13749053/95952819-6ca8c000-0e16-11eb-8b24-19b65bdf1f9f.png)
+
+### Profile Page
+![profile](https://user-images.githubusercontent.com/13749053/95952841-7500fb00-0e16-11eb-9559-ea9c6e2ae22c.png)
+
+### ProfilePic Page
+![profilepic](https://user-images.githubusercontent.com/13749053/95952849-79c5af00-0e16-11eb-892d-53831616616b.png)
+
+### Posts Page
+![posts](https://user-images.githubusercontent.com/13749053/95952860-81855380-0e16-11eb-9d7b-0209c1a28e28.png)
+
+### Post
+![single post](https://user-images.githubusercontent.com/13749053/95952864-84804400-0e16-11eb-960e-34d707a53ab5.png)
+
+### Photographers Gallery
+![gallery](https://user-images.githubusercontent.com/13749053/95952872-89dd8e80-0e16-11eb-8f8d-4246b86656ac.png)
+
+### Carousel View
+![coreousal view](https://user-images.githubusercontent.com/13749053/95952877-8c3fe880-0e16-11eb-8729-59515469a199.png)
+
+### Photographers Profiles
+![all profile](https://user-images.githubusercontent.com/13749053/95952882-8f3ad900-0e16-11eb-83ff-dcd8e9bc1ee6.png)
+  
  
