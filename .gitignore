@@ -1,5 +1,5 @@
 node_modules/
 
-
+public/uploads
 config/default.json
 client/build
